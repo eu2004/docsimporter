@@ -19,7 +19,7 @@ public class DocumentImporterAppConfiguration {
 
 	{
 		//validate all the properties
-		//validate();
+		validate();
 	}
 	
 	public ExistingDocumentImporterActions getImporterActionInCaseExists() {
