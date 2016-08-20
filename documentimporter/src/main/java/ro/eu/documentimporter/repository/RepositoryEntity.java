@@ -1,4 +1,4 @@
-package ro.eu.documentimporter;
+package ro.eu.documentimporter.repository;
 
 public class RepositoryEntity {
 	private RepositoryEntityIdAttribute id;

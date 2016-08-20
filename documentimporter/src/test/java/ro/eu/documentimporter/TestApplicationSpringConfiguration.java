@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
+import ro.eu.documentimporter.repository.RepositoryDocumentDAO;
+import ro.eu.documentimporter.repository.RepositoryDocumentService;
+
 /**
  * Created by emilu on 5/22/2016.
  */

@@ -11,6 +11,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
+import ro.eu.documentimporter.repository.Document;
+import ro.eu.documentimporter.repository.RepositoryDocumentDAO;
+import ro.eu.documentimporter.repository.RepositoryEntityIdAttribute;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestApplicationSpringConfiguration.class, loader = AnnotationConfigContextLoader.class)
 public class TestRepositoryDocumentDAO {
