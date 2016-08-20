@@ -12,7 +12,7 @@
 
 
 - to have a configuration properties file with the following properties:
-#Action to take in case a document is already exists.The values can be: VERSION, REPLACE, NEW, IGNORE
+#Action to take in case a document is already exists.The values can be: VERSION, REPLACE, NEW, IGNORE, UPDATE
 importer.action.in.case.exists=VERSION
 #Folder path containing the documents that should be imported
 importer.input.doc.folder=c:/input
