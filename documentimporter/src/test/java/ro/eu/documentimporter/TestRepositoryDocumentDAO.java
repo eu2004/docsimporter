@@ -26,7 +26,7 @@ public class TestRepositoryDocumentDAO {
 	@Test
 	public void testDocumentExists() {
 		try {
-			Method method = mokedRepositoryDocumentDAO.getClass().getMethod("documentExists", String.class);
+			Method method = mokedRepositoryDocumentDAO.getClass().getMethod("getDocumentByCriteria", String.class);
 			Assert.assertTrue(method != null);
 			Assert.assertEquals(Document.class, method.getReturnType());
 		} catch (Exception e) {
