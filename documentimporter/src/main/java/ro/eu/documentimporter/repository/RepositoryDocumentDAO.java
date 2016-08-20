@@ -4,7 +4,7 @@ import ro.eu.documentimporter.repository.model.Document;
 import ro.eu.documentimporter.repository.model.RepositoryEntityIdAttribute;
 
 public interface RepositoryDocumentDAO {
-	public Document documentExists(String findCriteria);
+	public Document getDocumentByCriteria(String criteria);
 
 	public Document getDocumentById(RepositoryEntityIdAttribute id);
 	

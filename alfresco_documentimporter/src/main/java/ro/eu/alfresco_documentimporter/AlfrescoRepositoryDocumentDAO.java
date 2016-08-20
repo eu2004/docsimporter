@@ -7,7 +7,7 @@ import ro.eu.documentimporter.repository.model.RepositoryEntityIdAttribute;
 public class AlfrescoRepositoryDocumentDAO implements RepositoryDocumentDAO{
 
 	@Override
-	public Document documentExists(String findCriteria) {
+	public Document getDocumentByCriteria(String findCriteria) {
 		return null;
 	}
 

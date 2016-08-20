@@ -25,7 +25,7 @@ public class RepositoryDocumentService {
 
 		try {
 			// check if document already exists
-			Document existingDocument = repositoryDocumentDAO.documentExists(document.getFindCriteria());
+			Document existingDocument = repositoryDocumentDAO.getDocumentByCriteria(document.getFindCriteria());
 			if (existingDocument == null) {
 				// if objects not exists create a new one
 				return repositoryDocumentDAO.createDocument(document).getId();

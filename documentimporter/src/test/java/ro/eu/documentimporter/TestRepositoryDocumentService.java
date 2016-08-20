@@ -53,7 +53,7 @@ public class TestRepositoryDocumentService {
 			expectedDoc.setId(id);
 
 			RepositoryDocumentDAO repositoryDAO = mockedRepositoryDocumentService.getRepositoryDocumentDAO();
-			when(repositoryDAO.documentExists(anyString())).thenReturn(null);
+			when(repositoryDAO.getDocumentByCriteria(anyString())).thenReturn(null);
 			when(repositoryDAO.createDocument(inputDoc)).thenReturn(expectedDoc);
 			// when
 			RepositoryEntityIdAttribute docId = mockedRepositoryDocumentService.importDocument(inputDoc);
@@ -61,7 +61,7 @@ public class TestRepositoryDocumentService {
 			Assert.assertNotNull(docId);
 			Assert.assertTrue(expectedDoc.getId().getValue().equals(docId.getValue()));
 			verify(repositoryDAO, times(1)).createDocument(inputDoc);
-			verify(repositoryDAO, times(1)).documentExists(anyString());
+			verify(repositoryDAO, times(1)).getDocumentByCriteria(anyString());
 		} catch (Exception e) {
 			logger.error("Error checking method existance", e);
 			Assert.fail(e.getMessage());
@@ -72,7 +72,7 @@ public class TestRepositoryDocumentService {
 	public void testImportDocumentWithIgnore() {
 		try {
 			// given
-			when(mockedRepositoryDocumentService.getRepositoryDocumentDAO().documentExists(anyString()))
+			when(mockedRepositoryDocumentService.getRepositoryDocumentDAO().getDocumentByCriteria(anyString()))
 					.thenReturn(new Document());
 			when(mockedRepositoryDocumentService.getApplicationConfiguration().getImporterActionInCaseExists())
 					.thenReturn(ExistingDocumentImporterActions.IGNORE);
@@ -80,7 +80,7 @@ public class TestRepositoryDocumentService {
 			RepositoryEntityIdAttribute docId = mockedRepositoryDocumentService.importDocument(new Document());
 			// then
 			Assert.assertNull(docId);
-			verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).documentExists(anyString());
+			verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).getDocumentByCriteria(anyString());
 		} catch (Exception e) {
 			logger.error("Error checking method existance", e);
 			Assert.fail(e.getMessage());
@@ -101,7 +101,7 @@ public class TestRepositoryDocumentService {
 			id.setMetadata(metadata);
 			expectedDoc.setId(id);
 
-			when(mockedRepositoryDocumentService.getRepositoryDocumentDAO().documentExists(anyString()))
+			when(mockedRepositoryDocumentService.getRepositoryDocumentDAO().getDocumentByCriteria(anyString()))
 					.thenReturn(inputDoc);
 			when(mockedRepositoryDocumentService.getRepositoryDocumentDAO().createDocumentNewVersion(inputDoc))
 					.thenReturn(expectedDoc);
@@ -114,7 +114,7 @@ public class TestRepositoryDocumentService {
 			Assert.assertTrue(expectedDoc.getId().getValue().equals(docId.getValue()));
 			verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1))
 					.createDocumentNewVersion(inputDoc);
-			verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).documentExists(anyString());
+			verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).getDocumentByCriteria(anyString());
 		} catch (Exception e) {
 			logger.error("Error checking method existance", e);
 			Assert.fail(e.getMessage());
@@ -135,7 +135,7 @@ public class TestRepositoryDocumentService {
 			id.setMetadata(metadata);
 			expectedDoc.setId(id);
 
-			when(mockedRepositoryDocumentService.getRepositoryDocumentDAO().documentExists(anyString()))
+			when(mockedRepositoryDocumentService.getRepositoryDocumentDAO().getDocumentByCriteria(anyString()))
 					.thenReturn(inputDoc);
 			when(mockedRepositoryDocumentService.getRepositoryDocumentDAO().updateDocument(inputDoc))
 					.thenReturn(expectedDoc);
@@ -146,7 +146,7 @@ public class TestRepositoryDocumentService {
 			// then
 			Assert.assertNotNull(docId);
 			Assert.assertTrue(expectedDoc.getId().getValue().equals(docId.getValue()));
-			verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).documentExists(anyString());
+			verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).getDocumentByCriteria(anyString());
 			verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).updateDocument(inputDoc);
 		} catch (Exception e) {
 			logger.error("Error checking method existance", e);
@@ -168,7 +168,7 @@ public class TestRepositoryDocumentService {
 			id.setMetadata(metadata);
 			expectedDoc.setId(id);
 
-			when(mockedRepositoryDocumentService.getRepositoryDocumentDAO().documentExists(anyString()))
+			when(mockedRepositoryDocumentService.getRepositoryDocumentDAO().getDocumentByCriteria(anyString()))
 					.thenReturn(inputDoc);
 			when(mockedRepositoryDocumentService.getRepositoryDocumentDAO().replaceDocument(inputDoc))
 					.thenReturn(expectedDoc);
@@ -179,7 +179,7 @@ public class TestRepositoryDocumentService {
 			// then
 			Assert.assertNotNull(docId);
 			Assert.assertTrue(expectedDoc.getId().getValue().equals(docId.getValue()));
-			verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).documentExists(anyString());
+			verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).getDocumentByCriteria(anyString());
 			verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).replaceDocument(inputDoc);
 		} catch (Exception e) {
 			logger.error("Error checking method existance", e);
@@ -201,7 +201,7 @@ public class TestRepositoryDocumentService {
 			id.setMetadata(metadata);
 			expectedDoc.setId(id);
 		
-			when(mockedRepositoryDocumentService.getRepositoryDocumentDAO().documentExists(anyString()))
+			when(mockedRepositoryDocumentService.getRepositoryDocumentDAO().getDocumentByCriteria(anyString()))
 					.thenReturn(inputDoc);
 			when(mockedRepositoryDocumentService.getRepositoryDocumentDAO().updateDocument(inputDoc))
 					.thenReturn(expectedDoc);
@@ -211,7 +211,7 @@ public class TestRepositoryDocumentService {
 			RepositoryEntityIdAttribute docId = mockedRepositoryDocumentService.importDocument(inputDoc);
 			// then
 			Assert.assertNull(docId);
-			verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).documentExists(anyString());
+			verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).getDocumentByCriteria(anyString());
 		} catch (Exception e) {
 			logger.error("Error checking method existance", e);
 			Assert.fail(e.getMessage());
