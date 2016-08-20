@@ -1,4 +1,4 @@
-package docimporter.documentimporter;
+package ro.eu.documentimporter;
 
 import java.lang.reflect.Method;
 
@@ -10,6 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
+
+import ro.eu.documentimporter.Document;
+import ro.eu.documentimporter.RepositoryDocumentDAO;
+import ro.eu.documentimporter.RepositoryEntityIdAttribute;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestApplicationConfiguration.class, loader = AnnotationConfigContextLoader.class)

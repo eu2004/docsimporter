@@ -1,4 +1,4 @@
-package docimporter.documentimporter;
+package ro.eu.documentimporter;
 
 public interface RepositoryDocumentDAO {
 	public boolean documentExists(String findCriteria);

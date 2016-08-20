@@ -1,4 +1,4 @@
-package docimporter.documentimporter;
+package ro.eu.documentimporter;
 
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -7,6 +7,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+
+import ro.eu.documentimporter.RepositoryDocumentDAO;
+import ro.eu.documentimporter.RepositoryDocumentService;
 
 /**
  * Created by emilu on 5/22/2016.

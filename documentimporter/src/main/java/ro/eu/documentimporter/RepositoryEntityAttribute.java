@@ -1,4 +1,4 @@
-package docimporter.documentimporter;
+package ro.eu.documentimporter;
 
 public class RepositoryEntityAttribute {
 	private RepositoryMetadata metadata;
