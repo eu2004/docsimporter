@@ -4,27 +4,23 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-
-import ro.eu.documentimporter.RepositoryDocumentDAO;
-import ro.eu.documentimporter.RepositoryDocumentService;
 
 /**
  * Created by emilu on 5/22/2016.
  */
 @Configuration
+@ComponentScan
 @PropertySource("classpath:test-app.properties")
 public class TestApplicationConfiguration {
 	@Autowired
-	private Environment env;
+	private Environment environment;
 
 	@Mock
 	private RepositoryDocumentDAO repositoryDocumentDAO;
-
-	@Mock
-	private RepositoryDocumentService repositoryDocumentService;
 
 	// init mockito
 	{
@@ -38,6 +34,6 @@ public class TestApplicationConfiguration {
 
 	@Bean(name = "repositoryDocumentService")
 	public RepositoryDocumentService repositoryDocumentService() {
-		return repositoryDocumentService;
+		return new RepositoryDocumentService();
 	}
 }
