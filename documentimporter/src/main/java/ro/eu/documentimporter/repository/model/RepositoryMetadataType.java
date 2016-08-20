@@ -1,4 +1,4 @@
-package ro.eu.documentimporter.repository;
+package ro.eu.documentimporter.repository.model;
 
 public enum RepositoryMetadataType {
 	BOOLEAN,

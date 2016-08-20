@@ -1,6 +1,5 @@
 package ro.eu.documentimporter;
 
-import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -17,20 +16,8 @@ public class DocumentImporterAppConfiguration {
 	@Value("${importer.input.doc.name}")
 	private String importerInputDocName;
 
-	{
-		//validate all the properties
-		validate();
-	}
-	
 	public ExistingDocumentImporterActions getImporterActionInCaseExists() {
 		return ExistingDocumentImporterActions.findByActionName(importerActionInCaseExists);
-	}
-
-	private void validate() {
-		//validate importer.input.doc.name
-		if (!new File(importerInputDocName).exists() || new File(importerInputDocName).isDirectory()) {
-			throw new IllegalArgumentException("importer.input.doc.name is not valid - reffers a not valid file " + importerInputDocName);
-		}
 	}
 
 	public String getImporterInputDocName() {

@@ -17,12 +17,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import ro.eu.documentimporter.DocumentImporterAppConfiguration.ExistingDocumentImporterActions;
-import ro.eu.documentimporter.repository.Document;
 import ro.eu.documentimporter.repository.RepositoryDocumentDAO;
 import ro.eu.documentimporter.repository.RepositoryDocumentService;
-import ro.eu.documentimporter.repository.RepositoryEntityIdAttribute;
-import ro.eu.documentimporter.repository.RepositoryMetadata;
-import ro.eu.documentimporter.repository.RepositoryMetadataType;
+import ro.eu.documentimporter.repository.model.Document;
+import ro.eu.documentimporter.repository.model.RepositoryEntityIdAttribute;
+import ro.eu.documentimporter.repository.model.RepositoryMetadata;
+import ro.eu.documentimporter.repository.model.RepositoryMetadataType;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestApplicationSpringConfiguration.class, loader = AnnotationConfigContextLoader.class)

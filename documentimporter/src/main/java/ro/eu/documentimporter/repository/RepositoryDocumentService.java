@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ro.eu.documentimporter.DocumentImporterAppConfiguration;
+import ro.eu.documentimporter.repository.model.Document;
+import ro.eu.documentimporter.repository.model.RepositoryEntityIdAttribute;
 
 @Service
 public class RepositoryDocumentService {

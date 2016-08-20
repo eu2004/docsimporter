@@ -1,5 +1,8 @@
 package ro.eu.documentimporter.repository;
 
+import ro.eu.documentimporter.repository.model.Document;
+import ro.eu.documentimporter.repository.model.RepositoryEntityIdAttribute;
+
 public interface RepositoryDocumentDAO {
 	public Document documentExists(String findCriteria);
 

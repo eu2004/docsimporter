@@ -1,4 +1,4 @@
-package ro.eu.documentimporter.repository;
+package ro.eu.documentimporter.repository.model;
 
 public class RepositoryMetadata {
 	private String name;
