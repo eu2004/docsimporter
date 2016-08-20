@@ -16,10 +16,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import ro.eu.documentimporter.ApplicationConfiguration.ExistingDocumentImporterActions;
+import ro.eu.documentimporter.DocumentImporterAppConfiguration.ExistingDocumentImporterActions;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = TestApplicationConfiguration.class, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = TestApplicationSpringConfiguration.class, loader = AnnotationConfigContextLoader.class)
 public class TestRepositoryDocumentService {
 	private static final Logger logger = Logger.getLogger(TestRepositoryDocumentService.class);
 

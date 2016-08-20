@@ -16,7 +16,7 @@ import ro.eu.documentimporter.RepositoryDocumentDAO;
 import ro.eu.documentimporter.RepositoryEntityIdAttribute;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = TestApplicationConfiguration.class, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = TestApplicationSpringConfiguration.class, loader = AnnotationConfigContextLoader.class)
 public class TestRepositoryDocumentDAO {
 	private static final Logger logger = Logger.getLogger(TestRepositoryDocumentDAO.class);
 

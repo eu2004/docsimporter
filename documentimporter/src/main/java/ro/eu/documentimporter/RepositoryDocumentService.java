@@ -9,7 +9,7 @@ public class RepositoryDocumentService {
 	private static final Logger logger = Logger.getLogger(RepositoryDocumentService.class);
 
 	@Autowired
-	private ApplicationConfiguration applicationConfiguration;
+	private DocumentImporterAppConfiguration applicationConfiguration;
 
 	@Autowired
 	private RepositoryDocumentDAO repositoryDocumentDAO;
@@ -57,11 +57,11 @@ public class RepositoryDocumentService {
 		return repositoryDocumentDAO;
 	}
 
-	public ApplicationConfiguration getApplicationConfiguration() {
+	public DocumentImporterAppConfiguration getApplicationConfiguration() {
 		return applicationConfiguration;
 	}
 
-	public void setApplicationConfiguration(ApplicationConfiguration applicationConfiguration) {
+	public void setApplicationConfiguration(DocumentImporterAppConfiguration applicationConfiguration) {
 		this.applicationConfiguration = applicationConfiguration;
 	}
 

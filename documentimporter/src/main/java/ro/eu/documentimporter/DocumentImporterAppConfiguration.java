@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @PropertySource("classpath:app.properties")
-public class ApplicationConfiguration {
+public class DocumentImporterAppConfiguration {
 	@Value("${importer.action.in.case.exists}")
 	private String importerActionInCaseExists;
 

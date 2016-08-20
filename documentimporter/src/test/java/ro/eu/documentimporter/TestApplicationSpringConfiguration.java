@@ -15,12 +15,12 @@ import org.springframework.core.env.Environment;
 @Configuration
 @ComponentScan
 @PropertySource("classpath:test-app.properties")
-public class TestApplicationConfiguration {
+public class TestApplicationSpringConfiguration {
 	@Autowired
 	private Environment environment;
 
 	@Mock
-	private ApplicationConfiguration applicationConfiguration;
+	private DocumentImporterAppConfiguration applicationConfiguration;
 
 	@Mock
 	private RepositoryDocumentDAO repositoryDocumentDAO;
@@ -36,7 +36,7 @@ public class TestApplicationConfiguration {
 	}
 
 	@Bean(name = "applicationConfiguration")
-	public ApplicationConfiguration applicationConfiguration() {
+	public DocumentImporterAppConfiguration applicationConfiguration() {
 		return applicationConfiguration;
 	}
 
