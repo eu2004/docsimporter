@@ -24,6 +24,8 @@ importer.no.of.importing.threads=1
 document_id=object_id
 #Repository brand: can be DOCUMENTUM, ALFRESCO, etc.
 importer.repository=DOCUMENTUM
+#Ignored document attributes names
+IGNORED_ATTRIBUTES_NAMES=r_object_id
 
 
 Technical details:
