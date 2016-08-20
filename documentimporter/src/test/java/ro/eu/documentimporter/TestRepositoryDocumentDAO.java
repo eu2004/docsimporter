@@ -11,10 +11,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import ro.eu.documentimporter.Document;
-import ro.eu.documentimporter.RepositoryDocumentDAO;
-import ro.eu.documentimporter.RepositoryEntityIdAttribute;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestApplicationSpringConfiguration.class, loader = AnnotationConfigContextLoader.class)
 public class TestRepositoryDocumentDAO {
@@ -38,10 +34,10 @@ public class TestRepositoryDocumentDAO {
 	@Test
 	public void testGetDocumentById() {
 		try {
-			Method getDocumentByIdMethod = mokedRepositoryDocumentDAO.getClass().getMethod("getDocumentById",
+			Method methodToExecute = mokedRepositoryDocumentDAO.getClass().getMethod("getDocumentById",
 					RepositoryEntityIdAttribute.class);
-			Assert.assertTrue(getDocumentByIdMethod != null);
-			Assert.assertEquals(Document.class, getDocumentByIdMethod.getReturnType());
+			Assert.assertTrue(methodToExecute != null);
+			Assert.assertEquals(Document.class, methodToExecute.getReturnType());
 		} catch (Exception e) {
 			logger.error("Error checking method existance", e);
 			Assert.fail(e.getMessage());
@@ -51,10 +47,10 @@ public class TestRepositoryDocumentDAO {
 	@Test
 	public void testCreateDocument() {
 		try {
-			Method getDocumentByIdMethod = mokedRepositoryDocumentDAO.getClass().getMethod("createDocument",
+			Method methodToExecute = mokedRepositoryDocumentDAO.getClass().getMethod("createDocument",
 					Document.class);
-			Assert.assertTrue(getDocumentByIdMethod != null);
-			Assert.assertEquals(Document.class, getDocumentByIdMethod.getReturnType());
+			Assert.assertTrue(methodToExecute != null);
+			Assert.assertEquals(Document.class, methodToExecute.getReturnType());
 		} catch (Exception e) {
 			logger.error("Error checking method existance", e);
 			Assert.fail(e.getMessage());
@@ -64,10 +60,10 @@ public class TestRepositoryDocumentDAO {
 	@Test
 	public void testCreateDocumentNewVersion() {
 		try {
-			Method getDocumentByIdMethod = mokedRepositoryDocumentDAO.getClass().getMethod("createDocumentNewVersion",
+			Method methodToExecute = mokedRepositoryDocumentDAO.getClass().getMethod("createDocumentNewVersion",
 					Document.class);
-			Assert.assertTrue(getDocumentByIdMethod != null);
-			Assert.assertEquals(Document.class, getDocumentByIdMethod.getReturnType());
+			Assert.assertTrue(methodToExecute != null);
+			Assert.assertEquals(Document.class, methodToExecute.getReturnType());
 		} catch (Exception e) {
 			logger.error("Error checking method existance", e);
 			Assert.fail(e.getMessage());
@@ -77,10 +73,23 @@ public class TestRepositoryDocumentDAO {
 	@Test
 	public void testUpdateDocument() {
 		try {
-			Method getDocumentByIdMethod = mokedRepositoryDocumentDAO.getClass().getMethod("updateDocument",
+			Method methodToExecute = mokedRepositoryDocumentDAO.getClass().getMethod("updateDocument",
 					Document.class);
-			Assert.assertTrue(getDocumentByIdMethod != null);
-			Assert.assertEquals(Document.class, getDocumentByIdMethod.getReturnType());
+			Assert.assertTrue(methodToExecute != null);
+			Assert.assertEquals(Document.class, methodToExecute.getReturnType());
+		} catch (Exception e) {
+			logger.error("Error checking method existance", e);
+			Assert.fail(e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testReplaceDocument() {
+		try {
+			Method methodToExecute = mokedRepositoryDocumentDAO.getClass().getMethod("replaceDocument",
+					Document.class);
+			Assert.assertTrue(methodToExecute != null);
+			Assert.assertEquals(Document.class, methodToExecute.getReturnType());
 		} catch (Exception e) {
 			logger.error("Error checking method existance", e);
 			Assert.fail(e.getMessage());

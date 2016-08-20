@@ -10,4 +10,6 @@ public interface RepositoryDocumentDAO {
 	public Document createDocumentNewVersion(Document document);
 	
 	public Document updateDocument(Document document);
+
+	public Document replaceDocument(Document document);
 }

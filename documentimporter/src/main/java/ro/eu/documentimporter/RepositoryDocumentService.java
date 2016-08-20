@@ -39,6 +39,9 @@ public class RepositoryDocumentService {
 				case UPDATE:
 					logger.info(document + " already exists but update it");
 					return repositoryDocumentDAO.updateDocument(document).getId();
+				case REPLACE:
+					logger.info(document + " already exists but replace it");
+					return repositoryDocumentDAO.replaceDocument(document).getId();
 				case VERSION:
 					logger.info(document + " already exists but create a new version of it");
 					return repositoryDocumentDAO.createDocumentNewVersion(document).getId();

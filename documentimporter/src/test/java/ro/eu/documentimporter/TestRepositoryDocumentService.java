@@ -147,6 +147,39 @@ public class TestRepositoryDocumentService {
 			Assert.fail(e.getMessage());
 		}
 	}
+	
+	@Test
+	public void testImportDocumentWithReplace() {
+		try {
+			// given
+			final Document inputDoc = new Document();
+			final Document expectedDoc = new Document();
+			RepositoryEntityIdAttribute id = new RepositoryEntityIdAttribute();
+			id.setValue("00000000000000000000");
+			RepositoryMetadata metadata = new RepositoryMetadata();
+			metadata.setName("r_object_id");
+			metadata.setType(RepositoryMetadataType.STRING);
+			id.setMetadata(metadata);
+			expectedDoc.setId(id);
+
+			when(mockedRepositoryDocumentService.getRepositoryDocumentDAO().documentExists(anyString()))
+					.thenReturn(inputDoc);
+			when(mockedRepositoryDocumentService.getRepositoryDocumentDAO().replaceDocument(inputDoc))
+					.thenReturn(expectedDoc);
+			when(mockedRepositoryDocumentService.getApplicationConfiguration().getImporterActionInCaseExists())
+					.thenReturn(ExistingDocumentImporterActions.REPLACE);
+			// when
+			RepositoryEntityIdAttribute docId = mockedRepositoryDocumentService.importDocument(inputDoc);
+			// then
+			Assert.assertNotNull(docId);
+			Assert.assertTrue(expectedDoc.getId().getValue().equals(docId.getValue()));
+			verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).documentExists(anyString());
+			verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).replaceDocument(inputDoc);
+		} catch (Exception e) {
+			logger.error("Error checking method existance", e);
+			Assert.fail(e.getMessage());
+		}
+	}
 
 	@Test
 	public void testImportDocumentWithNoAction() {

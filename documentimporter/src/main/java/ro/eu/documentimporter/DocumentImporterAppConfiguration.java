@@ -18,7 +18,7 @@ public class DocumentImporterAppConfiguration {
 	}
 
 	public static enum ExistingDocumentImporterActions {
-		VERSION("VERSION"), UPDATE("REPLACE"), NEW("CREATE"), IGNORE("SKIP");
+		VERSION("VERSION"), UPDATE("UPDATE"), NEW("CREATE"), IGNORE("SKIP"), REPLACE("REPLACE");
 
 		private static Map<String, ExistingDocumentImporterActions> actionsMap = new LinkedHashMap<>(1);
 		private String actionName;
