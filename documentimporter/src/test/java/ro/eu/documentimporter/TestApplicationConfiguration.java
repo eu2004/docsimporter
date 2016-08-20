@@ -20,6 +20,9 @@ public class TestApplicationConfiguration {
 	private Environment environment;
 
 	@Mock
+	private ApplicationConfiguration applicationConfiguration;
+
+	@Mock
 	private RepositoryDocumentDAO repositoryDocumentDAO;
 
 	// init mockito
@@ -30,6 +33,11 @@ public class TestApplicationConfiguration {
 	@Bean(name = "repositoryDocumentDAO")
 	public RepositoryDocumentDAO repositoryDocumentDAO() {
 		return repositoryDocumentDAO;
+	}
+
+	@Bean(name = "applicationConfiguration")
+	public ApplicationConfiguration applicationConfiguration() {
+		return applicationConfiguration;
 	}
 
 	@Bean(name = "repositoryDocumentService")

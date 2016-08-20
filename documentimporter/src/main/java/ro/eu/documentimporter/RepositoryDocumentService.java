@@ -26,10 +26,13 @@ public class RepositoryDocumentService {
 				// if objects not exists create a new one
 				return repositoryDocumentDAO.createDocument(document).getId();
 			} else {
-				switch (applicationConfiguration.getImporterActionInCaseExists()) {
-				case IGNORE:
-					logger.info(document + " was not created because already exists");
+				if (applicationConfiguration.getImporterActionInCaseExists() == null) {
+					logger.error(document
+							+ " already exists but no action found for it. Please check application configuration file.");
 					return null;
+				}
+
+				switch (applicationConfiguration.getImporterActionInCaseExists()) {
 				case NEW:
 					logger.info(document + " already exists but create a new document");
 					return repositoryDocumentDAO.createDocument(document).getId();
@@ -40,8 +43,7 @@ public class RepositoryDocumentService {
 					logger.info(document + " already exists but create a new version of it");
 					return repositoryDocumentDAO.createDocumentNewVersion(document).getId();
 				default:
-					logger.error(document
-							+ " already exists but no action found for it. Please check application configuration file.");
+					logger.info(document + " was not created because already exists");
 					return null;
 				}
 			}
@@ -54,4 +56,17 @@ public class RepositoryDocumentService {
 	public RepositoryDocumentDAO getRepositoryDocumentDAO() {
 		return repositoryDocumentDAO;
 	}
+
+	public ApplicationConfiguration getApplicationConfiguration() {
+		return applicationConfiguration;
+	}
+
+	public void setApplicationConfiguration(ApplicationConfiguration applicationConfiguration) {
+		this.applicationConfiguration = applicationConfiguration;
+	}
+
+	public void setRepositoryDocumentDAO(RepositoryDocumentDAO repositoryDocumentDAO) {
+		this.repositoryDocumentDAO = repositoryDocumentDAO;
+	}
+
 }
