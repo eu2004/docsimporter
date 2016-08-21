@@ -20,7 +20,7 @@ public class RepositoryDocumentService {
 
 	public RepositoryEntityIdAttribute importDocument(Document document) throws RepositoryDocumentServiceException {
 		if (document == null) {
-			throw new RepositoryDocumentServiceException("document cannot be NULL!");
+			throw new RepositoryDocumentServiceException("Document cannot be NULL!");
 		}
 
 		try {
@@ -28,6 +28,7 @@ public class RepositoryDocumentService {
 			Document existingDocument = repositoryDocumentDAO.getDocumentByCriteria(document.getFindCriteria());
 			if (existingDocument == null) {
 				// if objects not exists create a new one
+				logger.debug(document + " not exists create a new document");
 				return repositoryDocumentDAO.createDocument(document).getId();
 			} else {
 				if (applicationConfiguration.getImporterActionInCaseExists() == null) {
@@ -38,19 +39,19 @@ public class RepositoryDocumentService {
 
 				switch (applicationConfiguration.getImporterActionInCaseExists()) {
 				case NEW:
-					logger.info(document + " already exists but create a new document");
+					logger.debug(document + " already exists but create a new document");
 					return repositoryDocumentDAO.createDocument(document).getId();
 				case UPDATE:
-					logger.info(document + " already exists but update it");
+					logger.debug(document + " already exists but update it");
 					return repositoryDocumentDAO.updateDocument(document).getId();
 				case REPLACE:
-					logger.info(document + " already exists but replace it");
+					logger.debug(document + " already exists but replace it");
 					return repositoryDocumentDAO.replaceDocument(document).getId();
 				case VERSION:
-					logger.info(document + " already exists but create a new version of it");
+					logger.debug(document + " already exists but create a new version of it");
 					return repositoryDocumentDAO.createDocumentNewVersion(document).getId();
 				default:
-					logger.info(document + " was not created because already exists");
+					logger.debug(document + " was not created because already exists");
 					return null;
 				}
 			}
