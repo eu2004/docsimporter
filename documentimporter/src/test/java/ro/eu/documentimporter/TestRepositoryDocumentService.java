@@ -20,6 +20,7 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import ro.eu.documentimporter.DocumentImporterAppConfiguration.ExistingDocumentImporterActions;
 import ro.eu.documentimporter.repository.RepositoryDocumentDAO;
 import ro.eu.documentimporter.repository.RepositoryDocumentService;
+import ro.eu.documentimporter.repository.RepositoryDocumentServiceException;
 import ro.eu.documentimporter.repository.model.Document;
 import ro.eu.documentimporter.repository.model.RepositoryEntityIdAttribute;
 import ro.eu.documentimporter.repository.model.RepositoryMetadata;
@@ -215,5 +216,43 @@ public class TestRepositoryDocumentService {
 				.replaceDocument(any(Document.class));
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).updateDocument(any(Document.class));
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).createDocument(any(Document.class));
+	}
+
+	@Test
+	public void testImportDocumentWithError() {
+		// given
+		final Document inputDoc = new Document();
+		final Document expectedDoc = new Document();
+		RepositoryEntityIdAttribute id = new RepositoryEntityIdAttribute();
+		id.setValue("00000000000000000000");
+		RepositoryMetadata metadata = new RepositoryMetadata();
+		metadata.setName("r_object_id");
+		metadata.setType(RepositoryMetadataType.STRING);
+		id.setMetadata(metadata);
+		expectedDoc.setId(id);
+
+		when(mockedRepositoryDocumentService.getRepositoryDocumentDAO().getDocumentByCriteria(anyString()))
+				.thenThrow(new RuntimeException("Known exception"));
+		// when
+		try {
+			mockedRepositoryDocumentService.importDocument(inputDoc);
+			Assert.fail("Test should have failed with a \"Known exception\"");
+			// then
+		} catch (Exception ex) {
+			Assert.assertTrue(ex instanceof RepositoryDocumentServiceException);
+			Assert.assertEquals("java.lang.RuntimeException: Known exception", ex.getMessage());
+			
+			verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1))
+					.getDocumentByCriteria(anyString());
+			verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
+					.createDocumentNewVersion(any(Document.class));
+			verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
+					.replaceDocument(any(Document.class));
+			verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
+					.updateDocument(any(Document.class));
+			verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
+					.createDocument(any(Document.class));
+		}
+
 	}
 }
