@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import ro.eu.documentimporter.repository.RepositoryDocumentDAO;
-import ro.eu.documentimporter.repository.model.Document;
+import ro.eu.documentimporter.repository.model.RepositoryDocument;
 import ro.eu.documentimporter.repository.model.RepositoryEntityIdAttribute;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -51,7 +51,7 @@ public class TestRepositoryDocumentDAO {
 	public void testGetDocumentByCriteria() throws Exception {
 		Method method = mokedRepositoryDocumentDAO.getClass().getMethod("getDocumentByCriteria", String.class);
 		Assert.assertTrue(method != null);
-		Assert.assertEquals(Document.class, method.getReturnType());
+		Assert.assertEquals(RepositoryDocument.class, method.getReturnType());
 	}
 
 	@Test
@@ -59,35 +59,35 @@ public class TestRepositoryDocumentDAO {
 		Method methodToExecute = mokedRepositoryDocumentDAO.getClass().getMethod("getDocumentById",
 				RepositoryEntityIdAttribute.class);
 		Assert.assertTrue(methodToExecute != null);
-		Assert.assertEquals(Document.class, methodToExecute.getReturnType());
+		Assert.assertEquals(RepositoryDocument.class, methodToExecute.getReturnType());
 	}
 
 	@Test
 	public void testCreateDocument() throws Exception {
-		Method methodToExecute = mokedRepositoryDocumentDAO.getClass().getMethod("createDocument", Document.class);
+		Method methodToExecute = mokedRepositoryDocumentDAO.getClass().getMethod("createDocument", RepositoryDocument.class);
 		Assert.assertTrue(methodToExecute != null);
-		Assert.assertEquals(Document.class, methodToExecute.getReturnType());
+		Assert.assertEquals(RepositoryDocument.class, methodToExecute.getReturnType());
 	}
 
 	@Test
 	public void testCreateDocumentNewVersion() throws Exception {
 		Method methodToExecute = mokedRepositoryDocumentDAO.getClass().getMethod("createDocumentNewVersion",
-				Document.class);
+				RepositoryDocument.class);
 		Assert.assertTrue(methodToExecute != null);
-		Assert.assertEquals(Document.class, methodToExecute.getReturnType());
+		Assert.assertEquals(RepositoryDocument.class, methodToExecute.getReturnType());
 	}
 
 	@Test
 	public void testUpdateDocument() throws Exception {
-		Method methodToExecute = mokedRepositoryDocumentDAO.getClass().getMethod("updateDocument", Document.class);
+		Method methodToExecute = mokedRepositoryDocumentDAO.getClass().getMethod("updateDocument", RepositoryDocument.class);
 		Assert.assertTrue(methodToExecute != null);
-		Assert.assertEquals(Document.class, methodToExecute.getReturnType());
+		Assert.assertEquals(RepositoryDocument.class, methodToExecute.getReturnType());
 	}
 
 	@Test
 	public void testReplaceDocument() throws Exception {
-		Method methodToExecute = mokedRepositoryDocumentDAO.getClass().getMethod("replaceDocument", Document.class);
+		Method methodToExecute = mokedRepositoryDocumentDAO.getClass().getMethod("replaceDocument", RepositoryDocument.class);
 		Assert.assertTrue(methodToExecute != null);
-		Assert.assertEquals(Document.class, methodToExecute.getReturnType());
+		Assert.assertEquals(RepositoryDocument.class, methodToExecute.getReturnType());
 	}
 }

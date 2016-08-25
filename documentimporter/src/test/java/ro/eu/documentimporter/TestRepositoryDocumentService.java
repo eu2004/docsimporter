@@ -21,7 +21,7 @@ import ro.eu.documentimporter.DocumentImporterAppConfiguration.ExistingDocumentI
 import ro.eu.documentimporter.repository.RepositoryDocumentDAO;
 import ro.eu.documentimporter.repository.RepositoryDocumentService;
 import ro.eu.documentimporter.repository.RepositoryDocumentServiceException;
-import ro.eu.documentimporter.repository.model.Document;
+import ro.eu.documentimporter.repository.model.RepositoryDocument;
 import ro.eu.documentimporter.repository.model.RepositoryEntityIdAttribute;
 import ro.eu.documentimporter.repository.model.RepositoryMetadata;
 import ro.eu.documentimporter.repository.model.RepositoryMetadataType;
@@ -41,9 +41,9 @@ public class TestRepositoryDocumentService {
 	@Test
 	public void testImportDocumentWithCreateNew() {
 		// given
-		final Document inputDoc = new Document();
+		final RepositoryDocument inputDoc = new RepositoryDocument();
 
-		final Document expectedDoc = new Document();
+		final RepositoryDocument expectedDoc = new RepositoryDocument();
 		RepositoryEntityIdAttribute id = new RepositoryEntityIdAttribute();
 		id.setValue("00000000000000000000");
 		RepositoryMetadata metadata = new RepositoryMetadata();
@@ -63,37 +63,37 @@ public class TestRepositoryDocumentService {
 		verify(repositoryDAO, times(1)).createDocument(inputDoc);
 		verify(repositoryDAO, times(1)).getDocumentByCriteria(anyString());
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
-				.createDocumentNewVersion(any(Document.class));
+				.createDocumentNewVersion(any(RepositoryDocument.class));
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
-				.replaceDocument(any(Document.class));
-		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).updateDocument(any(Document.class));
+				.replaceDocument(any(RepositoryDocument.class));
+		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).updateDocument(any(RepositoryDocument.class));
 	}
 
 	@Test
 	public void testImportDocumentWithIgnore() {
 		// given
 		when(mockedRepositoryDocumentService.getRepositoryDocumentDAO().getDocumentByCriteria(anyString()))
-				.thenReturn(new Document());
+				.thenReturn(new RepositoryDocument());
 		when(mockedRepositoryDocumentService.getApplicationConfiguration().getImporterActionInCaseExists())
 				.thenReturn(ExistingDocumentImporterActions.IGNORE);
 		// when
-		RepositoryEntityIdAttribute docId = mockedRepositoryDocumentService.importDocument(new Document());
+		RepositoryEntityIdAttribute docId = mockedRepositoryDocumentService.importDocument(new RepositoryDocument());
 		// then
 		Assert.assertNull(docId);
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).getDocumentByCriteria(anyString());
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
-				.createDocumentNewVersion(any(Document.class));
+				.createDocumentNewVersion(any(RepositoryDocument.class));
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
-				.replaceDocument(any(Document.class));
-		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).updateDocument(any(Document.class));
-		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).createDocument(any(Document.class));
+				.replaceDocument(any(RepositoryDocument.class));
+		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).updateDocument(any(RepositoryDocument.class));
+		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).createDocument(any(RepositoryDocument.class));
 	}
 
 	@Test
 	public void testImportDocumentWithVersion() {
 		// given
-		final Document inputDoc = new Document();
-		final Document expectedDoc = new Document();
+		final RepositoryDocument inputDoc = new RepositoryDocument();
+		final RepositoryDocument expectedDoc = new RepositoryDocument();
 		RepositoryEntityIdAttribute id = new RepositoryEntityIdAttribute();
 		id.setValue("00000000000000000000");
 		RepositoryMetadata metadata = new RepositoryMetadata();
@@ -116,16 +116,16 @@ public class TestRepositoryDocumentService {
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).createDocumentNewVersion(inputDoc);
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).getDocumentByCriteria(anyString());
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
-				.replaceDocument(any(Document.class));
-		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).updateDocument(any(Document.class));
-		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).createDocument(any(Document.class));
+				.replaceDocument(any(RepositoryDocument.class));
+		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).updateDocument(any(RepositoryDocument.class));
+		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).createDocument(any(RepositoryDocument.class));
 	}
 
 	@Test
 	public void testImportDocumentWithUpdate() {
 		// given
-		final Document inputDoc = new Document();
-		final Document expectedDoc = new Document();
+		final RepositoryDocument inputDoc = new RepositoryDocument();
+		final RepositoryDocument expectedDoc = new RepositoryDocument();
 		RepositoryEntityIdAttribute id = new RepositoryEntityIdAttribute();
 		id.setValue("00000000000000000000");
 		RepositoryMetadata metadata = new RepositoryMetadata();
@@ -148,17 +148,17 @@ public class TestRepositoryDocumentService {
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).getDocumentByCriteria(anyString());
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).updateDocument(inputDoc);
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
-				.createDocumentNewVersion(any(Document.class));
+				.createDocumentNewVersion(any(RepositoryDocument.class));
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
-				.replaceDocument(any(Document.class));
-		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).createDocument(any(Document.class));
+				.replaceDocument(any(RepositoryDocument.class));
+		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).createDocument(any(RepositoryDocument.class));
 	}
 
 	@Test
 	public void testImportDocumentWithReplace() {
 		// given
-		final Document inputDoc = new Document();
-		final Document expectedDoc = new Document();
+		final RepositoryDocument inputDoc = new RepositoryDocument();
+		final RepositoryDocument expectedDoc = new RepositoryDocument();
 		RepositoryEntityIdAttribute id = new RepositoryEntityIdAttribute();
 		id.setValue("00000000000000000000");
 		RepositoryMetadata metadata = new RepositoryMetadata();
@@ -181,16 +181,16 @@ public class TestRepositoryDocumentService {
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).getDocumentByCriteria(anyString());
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).replaceDocument(inputDoc);
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
-				.createDocumentNewVersion(any(Document.class));
-		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).updateDocument(any(Document.class));
-		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).createDocument(any(Document.class));
+				.createDocumentNewVersion(any(RepositoryDocument.class));
+		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).updateDocument(any(RepositoryDocument.class));
+		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).createDocument(any(RepositoryDocument.class));
 	}
 
 	@Test
 	public void testImportDocumentWithNoAction() {
 		// given
-		final Document inputDoc = new Document();
-		final Document expectedDoc = new Document();
+		final RepositoryDocument inputDoc = new RepositoryDocument();
+		final RepositoryDocument expectedDoc = new RepositoryDocument();
 		RepositoryEntityIdAttribute id = new RepositoryEntityIdAttribute();
 		id.setValue("00000000000000000000");
 		RepositoryMetadata metadata = new RepositoryMetadata();
@@ -211,18 +211,18 @@ public class TestRepositoryDocumentService {
 		Assert.assertNull(docId);
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).getDocumentByCriteria(anyString());
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
-				.createDocumentNewVersion(any(Document.class));
+				.createDocumentNewVersion(any(RepositoryDocument.class));
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
-				.replaceDocument(any(Document.class));
-		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).updateDocument(any(Document.class));
-		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).createDocument(any(Document.class));
+				.replaceDocument(any(RepositoryDocument.class));
+		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).updateDocument(any(RepositoryDocument.class));
+		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).createDocument(any(RepositoryDocument.class));
 	}
 
 	@Test
 	public void testImportDocumentWithError() {
 		// given
-		final Document inputDoc = new Document();
-		final Document expectedDoc = new Document();
+		final RepositoryDocument inputDoc = new RepositoryDocument();
+		final RepositoryDocument expectedDoc = new RepositoryDocument();
 		RepositoryEntityIdAttribute id = new RepositoryEntityIdAttribute();
 		id.setValue("00000000000000000000");
 		RepositoryMetadata metadata = new RepositoryMetadata();
@@ -245,13 +245,13 @@ public class TestRepositoryDocumentService {
 			verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1))
 					.getDocumentByCriteria(anyString());
 			verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
-					.createDocumentNewVersion(any(Document.class));
+					.createDocumentNewVersion(any(RepositoryDocument.class));
 			verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
-					.replaceDocument(any(Document.class));
+					.replaceDocument(any(RepositoryDocument.class));
 			verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
-					.updateDocument(any(Document.class));
+					.updateDocument(any(RepositoryDocument.class));
 			verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
-					.createDocument(any(Document.class));
+					.createDocument(any(RepositoryDocument.class));
 		}
 
 	}

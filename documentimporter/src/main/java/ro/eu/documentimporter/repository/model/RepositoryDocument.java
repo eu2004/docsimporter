@@ -1,6 +1,6 @@
 package ro.eu.documentimporter.repository.model;
 
-public class Document extends RepositoryEntity {
+public class RepositoryDocument extends RepositoryEntity {
 
 	private String findCriteria;
 

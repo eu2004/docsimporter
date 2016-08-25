@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ro.eu.documentimporter.DocumentImporterAppConfiguration;
-import ro.eu.documentimporter.repository.model.Document;
+import ro.eu.documentimporter.repository.model.RepositoryDocument;
 import ro.eu.documentimporter.repository.model.RepositoryEntityIdAttribute;
 
 @Service
@@ -18,14 +18,14 @@ public class RepositoryDocumentService {
 	@Autowired
 	private RepositoryDocumentDAO repositoryDocumentDAO;
 
-	public RepositoryEntityIdAttribute importDocument(Document document) throws RepositoryDocumentServiceException {
+	public RepositoryEntityIdAttribute importDocument(RepositoryDocument document) throws RepositoryDocumentServiceException {
 		if (document == null) {
 			throw new RepositoryDocumentServiceException("Document cannot be NULL!");
 		}
 
 		try {
 			// check if document already exists
-			Document existingDocument = repositoryDocumentDAO.getDocumentByCriteria(document.getFindCriteria());
+			RepositoryDocument existingDocument = repositoryDocumentDAO.getDocumentByCriteria(document.getFindCriteria());
 			if (existingDocument == null) {
 				// if objects not exists create a new one
 				logger.debug(document + " not exists create a new document");

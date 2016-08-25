@@ -1,18 +1,18 @@
 package ro.eu.documentimporter.repository;
 
-import ro.eu.documentimporter.repository.model.Document;
+import ro.eu.documentimporter.repository.model.RepositoryDocument;
 import ro.eu.documentimporter.repository.model.RepositoryEntityIdAttribute;
 
 public interface RepositoryDocumentDAO {
-	public Document getDocumentByCriteria(String criteria);
+	public RepositoryDocument getDocumentByCriteria(String criteria);
 
-	public Document getDocumentById(RepositoryEntityIdAttribute id);
+	public RepositoryDocument getDocumentById(RepositoryEntityIdAttribute id);
 	
-	public Document createDocument(Document document);
+	public RepositoryDocument createDocument(RepositoryDocument document);
 	
-	public Document createDocumentNewVersion(Document document);
+	public RepositoryDocument createDocumentNewVersion(RepositoryDocument document);
 	
-	public Document updateDocument(Document document);
+	public RepositoryDocument updateDocument(RepositoryDocument document);
 
-	public Document replaceDocument(Document document);
+	public RepositoryDocument replaceDocument(RepositoryDocument document);
 }
