@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=C:/Users/emilu/workspace/dctm_documentimporter/lib/dfc.jar -DgroupId=dctm -DartifactId=dfc -Dversion=6.5 -Dpackaging=jar -DgeneratePom=true
