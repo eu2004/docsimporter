@@ -17,6 +17,7 @@
 		<maven-compiler-plugin.version>2.3.1</maven-compiler-plugin.version>
 		<java.version>1.8</java.version>
 		<org.mockito.version>1.9.5</org.mockito.version>
+		<org.aspectj.version>1.6.11</org.aspectj.version>
 	</properties>
 
 	<dependencies>
@@ -39,6 +40,18 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
 			<version>${spring.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${org.aspectj.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${org.aspectj.version}</version>
 		</dependency>
 
 		<!-- http://mvnrepository.com/artifact/org.springframework/spring-test -->
