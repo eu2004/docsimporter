@@ -20,15 +20,22 @@ public class DctmSessionAspect {
 
 	@Autowired
 	private Environment env;
+	{
+		System.out.println("aspect initialized");
+	}
 
-	@Before("execution(* ro.eu.dctm_documentimporter.DctmRepositoryDocumentDAO.*(..))")
+	@Before("execution(* ro.eu.dctm_documentimporter.DctmRepositoryDocumentDAO.getDocumentByCriteria(..))")
 	public void setSession(JoinPoint joinPoint)
 			throws DfIdentityException, DfAuthenticationException, DfPrincipalException, DfServiceException {
 		IDctmSession dctmSession = (IDctmSession) joinPoint.getTarget();
-		dctmSession.setSession(sessionManager.getSession(env.getProperty("dctm.docbase")));
+		try {
+			dctmSession.setSession(sessionManager.getSession(env.getProperty("dctm.docbase")));
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 
-	@After("execution(* ro.eu.dctm_documentimporter.DctmRepositoryDocumentDAO.*(..))")
+	@After("execution(* ro.eu.dctm_documentimporter.DctmRepositoryDocumentDAO.getDocumentByCriteria(..))")
 	public void releaseSession(JoinPoint joinPoint)
 			throws DfIdentityException, DfAuthenticationException, DfPrincipalException, DfServiceException {
 		IDctmSession dctmSession = (IDctmSession) joinPoint.getTarget();

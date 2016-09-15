@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.core.env.Environment;
 
 import com.documentum.com.DfClientX;
@@ -15,6 +16,8 @@ import com.documentum.fc.common.DfException;
 import com.documentum.fc.common.DfLoginInfo;
 import com.documentum.fc.common.IDfLoginInfo;
 
+import ro.eu.documentimporter.repository.RepositoryDocumentDAO;
+
 @Configuration
 @EnableAspectJAutoProxy
 @ComponentScan
@@ -23,15 +26,19 @@ public class DctmApplicationConfiguration {
 	private Environment env;
 
 	@Bean
-	public IDfSessionManager getDocbaseAccessor() throws DfException {
+	public IDfSessionManager getIDfSessionManager() throws DfException {
 		IDfClientX clientx = new DfClientX();
 		IDfClient client = clientx.getLocalClient();
 		IDfSessionManager sessionManager = client.newSessionManager();
-		IDfLoginInfo loginInfo = new DfLoginInfo();
+		IDfLoginInfo loginInfo = clientx.getLoginInfo();
 		loginInfo.setUser(env.getProperty("dctm.user"));
 		loginInfo.setPassword(env.getProperty("dctm.pass"));
 		sessionManager.setIdentity(env.getProperty("dctm.docbase"), loginInfo);
 		return sessionManager;
 	}
-
+	
+	@Bean
+    public DctmSessionAspect dctmSessionAspect() {
+        return new DctmSessionAspect();
+    }
 }
