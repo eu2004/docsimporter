@@ -21,6 +21,7 @@ import ro.eu.documentimporter.DocumentImporterAppConfiguration.ExistingDocumentI
 import ro.eu.documentimporter.repository.RepositoryDocumentDAO;
 import ro.eu.documentimporter.repository.RepositoryDocumentService;
 import ro.eu.documentimporter.repository.RepositoryDocumentServiceException;
+import ro.eu.documentimporter.repository.RepositoryException;
 import ro.eu.documentimporter.repository.model.RepositoryDocument;
 import ro.eu.documentimporter.repository.model.RepositoryEntityIdAttribute;
 import ro.eu.documentimporter.repository.model.RepositoryMetadata;
@@ -39,7 +40,7 @@ public class TestRepositoryDocumentService {
 	}
 
 	@Test
-	public void testImportDocumentWithCreateNew() {
+	public void testImportDocumentWithCreateNew() throws RepositoryException {
 		// given
 		final RepositoryDocument inputDoc = new RepositoryDocument();
 
@@ -70,7 +71,7 @@ public class TestRepositoryDocumentService {
 	}
 
 	@Test
-	public void testImportDocumentWithIgnore() {
+	public void testImportDocumentWithIgnore() throws RepositoryException {
 		// given
 		when(mockedRepositoryDocumentService.getRepositoryDocumentDAO().getDocumentByCriteria(anyString()))
 				.thenReturn(new RepositoryDocument());
@@ -90,7 +91,7 @@ public class TestRepositoryDocumentService {
 	}
 
 	@Test
-	public void testImportDocumentWithVersion() {
+	public void testImportDocumentWithVersion() throws RepositoryException {
 		// given
 		final RepositoryDocument inputDoc = new RepositoryDocument();
 		final RepositoryDocument expectedDoc = new RepositoryDocument();

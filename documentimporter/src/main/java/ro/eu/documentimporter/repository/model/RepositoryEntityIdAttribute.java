@@ -10,4 +10,5 @@ public class RepositoryEntityIdAttribute extends RepositoryEntityAttribute {
 		super.setValue(value);
 	}
 
+	
 }
