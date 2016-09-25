@@ -60,14 +60,15 @@ public class TestRepositoryDocumentService {
 		RepositoryEntityIdAttribute docId = mockedRepositoryDocumentService.importDocument(inputDoc);
 		// then
 		Assert.assertNotNull(docId);
-		Assert.assertTrue(expectedDoc.getId().getValue().equals(docId.getValue()));
+		Assert.assertTrue(expectedDoc.getIdAttributeValue().getValue().equals(docId.getValue()));
 		verify(repositoryDAO, times(1)).createDocument(inputDoc);
 		verify(repositoryDAO, times(1)).getDocumentByCriteria(anyString());
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
 				.createDocumentNewVersion(any(RepositoryDocument.class));
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
 				.replaceDocument(any(RepositoryDocument.class));
-		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).updateDocument(any(RepositoryDocument.class));
+		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
+				.updateDocument(any(RepositoryDocument.class));
 	}
 
 	@Test
@@ -86,8 +87,10 @@ public class TestRepositoryDocumentService {
 				.createDocumentNewVersion(any(RepositoryDocument.class));
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
 				.replaceDocument(any(RepositoryDocument.class));
-		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).updateDocument(any(RepositoryDocument.class));
-		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).createDocument(any(RepositoryDocument.class));
+		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
+				.updateDocument(any(RepositoryDocument.class));
+		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
+				.createDocument(any(RepositoryDocument.class));
 	}
 
 	@Test
@@ -113,13 +116,15 @@ public class TestRepositoryDocumentService {
 		RepositoryEntityIdAttribute docId = mockedRepositoryDocumentService.importDocument(inputDoc);
 		// then
 		Assert.assertNotNull(docId);
-		Assert.assertTrue(expectedDoc.getId().getValue().equals(docId.getValue()));
+		Assert.assertTrue(expectedDoc.getIdAttributeValue().getValue().equals(docId.getValue()));
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).createDocumentNewVersion(inputDoc);
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).getDocumentByCriteria(anyString());
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
 				.replaceDocument(any(RepositoryDocument.class));
-		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).updateDocument(any(RepositoryDocument.class));
-		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).createDocument(any(RepositoryDocument.class));
+		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
+				.updateDocument(any(RepositoryDocument.class));
+		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
+				.createDocument(any(RepositoryDocument.class));
 	}
 
 	@Test
@@ -145,14 +150,15 @@ public class TestRepositoryDocumentService {
 		RepositoryEntityIdAttribute docId = mockedRepositoryDocumentService.importDocument(inputDoc);
 		// then
 		Assert.assertNotNull(docId);
-		Assert.assertTrue(expectedDoc.getId().getValue().equals(docId.getValue()));
+		Assert.assertTrue(expectedDoc.getIdAttributeValue().getValue().equals(docId.getValue()));
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).getDocumentByCriteria(anyString());
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).updateDocument(inputDoc);
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
 				.createDocumentNewVersion(any(RepositoryDocument.class));
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
 				.replaceDocument(any(RepositoryDocument.class));
-		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).createDocument(any(RepositoryDocument.class));
+		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
+				.createDocument(any(RepositoryDocument.class));
 	}
 
 	@Test
@@ -178,13 +184,15 @@ public class TestRepositoryDocumentService {
 		RepositoryEntityIdAttribute docId = mockedRepositoryDocumentService.importDocument(inputDoc);
 		// then
 		Assert.assertNotNull(docId);
-		Assert.assertTrue(expectedDoc.getId().getValue().equals(docId.getValue()));
+		Assert.assertTrue(expectedDoc.getIdAttributeValue().getValue().equals(docId.getValue()));
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).getDocumentByCriteria(anyString());
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).replaceDocument(inputDoc);
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
 				.createDocumentNewVersion(any(RepositoryDocument.class));
-		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).updateDocument(any(RepositoryDocument.class));
-		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).createDocument(any(RepositoryDocument.class));
+		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
+				.updateDocument(any(RepositoryDocument.class));
+		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
+				.createDocument(any(RepositoryDocument.class));
 	}
 
 	@Test
@@ -215,8 +223,10 @@ public class TestRepositoryDocumentService {
 				.createDocumentNewVersion(any(RepositoryDocument.class));
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
 				.replaceDocument(any(RepositoryDocument.class));
-		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).updateDocument(any(RepositoryDocument.class));
-		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never()).createDocument(any(RepositoryDocument.class));
+		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
+				.updateDocument(any(RepositoryDocument.class));
+		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())
+				.createDocument(any(RepositoryDocument.class));
 	}
 
 	@Test
@@ -242,7 +252,7 @@ public class TestRepositoryDocumentService {
 		} catch (Exception ex) {
 			Assert.assertTrue(ex instanceof RepositoryDocumentServiceException);
 			Assert.assertEquals("java.lang.RuntimeException: Known exception", ex.getMessage());
-			
+
 			verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1))
 					.getDocumentByCriteria(anyString());
 			verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), never())

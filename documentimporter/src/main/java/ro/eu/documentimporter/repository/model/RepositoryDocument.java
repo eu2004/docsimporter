@@ -3,15 +3,7 @@ package ro.eu.documentimporter.repository.model;
 public class RepositoryDocument extends RepositoryEntity {
 
 	private String findCriteria;
-	private String objectName;
-
-	public String getObjectName() {
-		return objectName;
-	}
-
-	public void setObjectName(String objectName) {
-		this.objectName = objectName;
-	}
+	private RepositoryEntityAttribute version;
 
 	public void setFindCriteria(String findCriteria) {
 		this.findCriteria = findCriteria;
@@ -19,5 +11,18 @@ public class RepositoryDocument extends RepositoryEntity {
 
 	public String getFindCriteria() {
 		return findCriteria;
+	}
+
+	public String[] getVersionAsStrings() {
+		return (String[]) version.getValue();
+	}
+
+	public RepositoryEntityAttribute getVersionAttributeValue() {
+		return version;
+	}
+
+	public void setVersion(RepositoryEntityAttribute version) {
+		this.version = version;
+		this.setAttributeValue(version);
 	}
 }

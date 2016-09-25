@@ -29,7 +29,7 @@ public class RepositoryDocumentService {
 			if (existingDocument == null) {
 				// if objects not exists create a new one
 				logger.debug(document + " not exists create a new document");
-				return repositoryDocumentDAO.createDocument(document).getId();
+				return repositoryDocumentDAO.createDocument(document).getIdAttributeValue();
 			} else {
 				if (applicationConfiguration.getImporterActionInCaseExists() == null) {
 					logger.error(document
@@ -40,16 +40,16 @@ public class RepositoryDocumentService {
 				switch (applicationConfiguration.getImporterActionInCaseExists()) {
 				case NEW:
 					logger.debug(document + " already exists but create a new document");
-					return repositoryDocumentDAO.createDocument(document).getId();
+					return repositoryDocumentDAO.createDocument(document).getIdAttributeValue();
 				case UPDATE:
 					logger.debug(document + " already exists but update it");
-					return repositoryDocumentDAO.updateDocument(document).getId();
+					return repositoryDocumentDAO.updateDocument(document).getIdAttributeValue();
 				case REPLACE:
 					logger.debug(document + " already exists but replace it");
-					return repositoryDocumentDAO.replaceDocument(document).getId();
+					return repositoryDocumentDAO.replaceDocument(document).getIdAttributeValue();
 				case VERSION:
 					logger.debug(document + " already exists but create a new version of it");
-					return repositoryDocumentDAO.createDocumentNewVersion(document).getId();
+					return repositoryDocumentDAO.createDocumentNewVersion(document).getIdAttributeValue();
 				default:
 					logger.debug(document + " was not created because already exists");
 					return null;
