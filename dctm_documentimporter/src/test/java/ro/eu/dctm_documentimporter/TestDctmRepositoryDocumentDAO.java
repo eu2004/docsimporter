@@ -71,6 +71,7 @@ public class TestDctmRepositoryDocumentDAO {
 		Assert.assertTrue(documentNewVersion != null);
 		Assert.assertTrue(documentNewVersion.getObjectName().equals(document.getObjectName()));
 		Assert.assertFalse(documentNewVersion.getId().equals(document.getId()));
+		Assert.assertFalse(Arrays.equals(documentNewVersion.getVersions(), document.getVersions()));
 	}
 
 	@Test

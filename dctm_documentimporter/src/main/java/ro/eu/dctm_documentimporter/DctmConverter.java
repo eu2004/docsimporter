@@ -43,6 +43,7 @@ public class DctmConverter implements Converter<IDfPersistentObject, RepositoryD
 			//r_object_type
 			document.setType(source.getString("r_object_type"));
 			//...
+			//TODO make this generic
 		} catch (Exception e) {
 			throw new IllegalArgumentException(e);
 		}

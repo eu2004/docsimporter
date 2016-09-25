@@ -23,29 +23,24 @@ public class DctmSessionAspect {
 
 	@Autowired
 	private Environment env;
-	{
-		logger.debug("aspect initialized");
-	}
 
-	//@Before("execution(* ro.eu.dctm_documentimporter.DctmRepositoryDocumentDAO.getDocumentByCriteria(..))")
 	@Before("execution(* ro.eu.dctm_documentimporter.DctmRepositoryDocumentDAO.*(..))")
 	public void setSession(JoinPoint joinPoint)
 			throws DfIdentityException, DfAuthenticationException, DfPrincipalException, DfServiceException {
 		IDctmSession dctmSession = (IDctmSession) joinPoint.getTarget();
 		try {
 			dctmSession.setSession(sessionManager.getSession(env.getProperty("dctm.docbase")));
-			logger.info("aspect setSession " + dctmSession.getSession());
+			logger.debug("aspect setSession " + dctmSession.getSession());
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
 
-	//@After("execution(* ro.eu.dctm_documentimporter.DctmRepositoryDocumentDAO.getDocumentByCriteria(..))")
 	@After("execution(* ro.eu.dctm_documentimporter.DctmRepositoryDocumentDAO.*(..))")
 	public void releaseSession(JoinPoint joinPoint)
 			throws DfIdentityException, DfAuthenticationException, DfPrincipalException, DfServiceException {
 		IDctmSession dctmSession = (IDctmSession) joinPoint.getTarget();
-		logger.info("aspect releaseSession " + dctmSession.getSession());
+		logger.debug("aspect releaseSession " + dctmSession.getSession());
 		sessionManager.release(dctmSession.getSession());
 	}
 }

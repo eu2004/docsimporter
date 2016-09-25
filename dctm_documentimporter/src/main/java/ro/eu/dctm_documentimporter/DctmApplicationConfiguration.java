@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.context.annotation.Scope;
 import org.springframework.core.env.Environment;
 
 import com.documentum.com.DfClientX;
@@ -13,10 +12,7 @@ import com.documentum.com.IDfClientX;
 import com.documentum.fc.client.IDfClient;
 import com.documentum.fc.client.IDfSessionManager;
 import com.documentum.fc.common.DfException;
-import com.documentum.fc.common.DfLoginInfo;
 import com.documentum.fc.common.IDfLoginInfo;
-
-import ro.eu.documentimporter.repository.RepositoryDocumentDAO;
 
 @Configuration
 @EnableAspectJAutoProxy
