@@ -3,7 +3,6 @@ package ro.eu.dctm_documentimporter;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 import com.documentum.com.DfClientX;
@@ -29,7 +28,7 @@ public class DctmRepositoryDocumentDAO implements RepositoryDocumentDAO, IDctmSe
 	private IDfSession session;
 	
 	@Autowired
-	private Converter<IDfPersistentObject, RepositoryDocument> dctmConverter;
+	private DctmConverter dctmConverter;
 
 	@Override
 	public RepositoryDocument getDocumentByCriteria(String findCriteria) throws RepositoryException {
@@ -42,7 +41,7 @@ public class DctmRepositoryDocumentDAO implements RepositoryDocumentDAO, IDctmSe
 			logger.error("Error getting object " + e.getMessage(), e);
 			throw new RepositoryException(e);
 		}
-		return dctmConverter.convert(object);
+		return dctmConverter.convert(object, new DctmDocument());
 	}
 
 	@Override
@@ -56,7 +55,7 @@ public class DctmRepositoryDocumentDAO implements RepositoryDocumentDAO, IDctmSe
 			logger.error("Error getting object " + e.getMessage(), e);
 			throw new RepositoryException(e);
 		}
-		return dctmConverter.convert(object);
+		return dctmConverter.convert(object, new DctmDocument());
 	}
 
 	@Override
@@ -64,14 +63,13 @@ public class DctmRepositoryDocumentDAO implements RepositoryDocumentDAO, IDctmSe
 		IDfPersistentObject object;
 		try {
 			object = session.newObject(document.getType());
-			//TODO create converter from repository document to idfpersistent
-			//object.setString("object_name", document.getObjectName());
+			object = dctmConverter.convert((DctmDocument) document, object);
 			object.save();
 		} catch (DfException e) {
 			logger.error("Error getting object " + e.getMessage(), e);
 			throw new RepositoryException(e);
 		}
-		return dctmConverter.convert(object);
+		return dctmConverter.convert(object, new DctmDocument());
 	}
 
 	@Override
@@ -80,8 +78,7 @@ public class DctmRepositoryDocumentDAO implements RepositoryDocumentDAO, IDctmSe
 		try {
 			object = (IDfSysObject) session.getObject(dctmClientX.getId(document.getId()));
 			object.checkout();
-			//TODO create converter from repository document to idfpersistent
-			//object.setObjectName(document.getObjectName());
+			object = (IDfSysObject) dctmConverter.convert((DctmDocument) document, object);
 			IDfId newId = object.checkin(false, null);
 			object = (IDfSysObject) session.getObject(newId);
 		} catch(DfIdNotFoundException e) {
@@ -90,7 +87,7 @@ public class DctmRepositoryDocumentDAO implements RepositoryDocumentDAO, IDctmSe
 			logger.error("Error createDocumentNewVersion " + e.getMessage(), e);
 			throw new RepositoryException(e);
 		}
-		return dctmConverter.convert(object);
+		return dctmConverter.convert(object, new DctmDocument());
 	}
 
 	@Override
@@ -98,8 +95,7 @@ public class DctmRepositoryDocumentDAO implements RepositoryDocumentDAO, IDctmSe
 		IDfSysObject object;
 		try {
 			object = (IDfSysObject) session.getObject(dctmClientX.getId(document.getId()));
-			//TODO create converter from repository document to idfpersistent
-			//object.setObjectName(document.getObjectName());
+			object = (IDfSysObject) dctmConverter.convert((DctmDocument) document, object);
 			object.save();
 		} catch(DfIdNotFoundException e) {
 			throw new RepositoryException(e);
@@ -107,7 +103,7 @@ public class DctmRepositoryDocumentDAO implements RepositoryDocumentDAO, IDctmSe
 			logger.error("Error createDocumentNewVersion " + e.getMessage(), e);
 			throw new RepositoryException(e);
 		}
-		return dctmConverter.convert(object);
+		return dctmConverter.convert(object, new DctmDocument());
 	}
 
 	@Override

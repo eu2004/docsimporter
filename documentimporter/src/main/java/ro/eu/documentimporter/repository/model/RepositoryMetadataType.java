@@ -4,7 +4,6 @@ public enum RepositoryMetadataType {
 	BOOLEAN,
 	INTEGER,
 	STRING,
-	LONG,
 	DATE,
 	DOUBLE;
 }

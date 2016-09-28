@@ -2,8 +2,8 @@ package ro.eu.documentimporter.repository.model;
 
 public class RepositoryDocument extends RepositoryEntity {
 
-	private String findCriteria;
-	private RepositoryEntityAttribute version;
+	protected String findCriteria;
+	protected RepositoryEntityAttribute version;
 
 	public void setFindCriteria(String findCriteria) {
 		this.findCriteria = findCriteria;

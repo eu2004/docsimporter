@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RepositoryEntity {
-	private RepositoryEntityIdAttribute id;
-	private RepositoryEntityAttribute type;
+	protected RepositoryEntityIdAttribute id;
+	protected RepositoryEntityAttribute type;
 	protected Map<String, RepositoryEntityAttribute> attributes = new HashMap<>(1);
 
 	public void setAttributeValue(RepositoryEntityAttribute attributeValue) {
