@@ -5,8 +5,14 @@
 - ability to create documents version tree.
 - the progress of the importing will be logged into a separate file and console. The errors will be logged into a different log file. A csv file will be created in the end specifying the status for each of the imported document and also its size in bytes.
 - the importer must be platform independent.
-- the documents to import will be specified into an xlsx file with the following structure:
-<document field name 1>,<document field name 2>, ... ,<document field name n (optional, must be the same as the repository document type attributes)>,[document content path (mandatory, contains a full disk path to the file content],[doc repository link location (optional)], [duplicate criteria (optional, contains a query - repository specific to identify the existing document],[previous version id, optional - in case is missing a new version of the document will be created]
+- the documents to import will be specified into an CSV file where on the first line must be defined the list of attributes of a document.
+The values are delimited by commas, the values containing comma character must be enclosed within double quotes.
+The order of attributes doesn't matter and at least one attribute must be specified. Some of the attributes must have specific names like:
+$CONTENT_SYSTEM_PATH - for the document content. In case is missing it will be skipped.
+$DOCUMENT_TYPE - for document type. In case is missing, a default will be used.
+$DUPLICATE_SEARCH_CRITERIA - to search for duplicates. The value is a free text, representing a specific query to search by some attributes.
+Example:dm_document where r_object_id=$r_object_id. <document type> where <attribute_name>=$<attribute_name>
+
 - the targeted repository credentials MUST be provided only in command line (NEVER stored them).
 - NICE TO HAVE: graphical user interface
 

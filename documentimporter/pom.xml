@@ -18,6 +18,7 @@
 		<java.version>1.8</java.version>
 		<org.mockito.version>1.9.5</org.mockito.version>
 		<org.aspectj.version>1.6.11</org.aspectj.version>
+		<commons-csv.version>1.4</commons-csv.version>
 	</properties>
 
 	<dependencies>
@@ -41,7 +42,7 @@
 			<artifactId>spring-core</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
@@ -95,6 +96,14 @@
 			<version>${org.mockito.version}</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-csv -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-csv</artifactId>
+			<version>${commons-csv.version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
