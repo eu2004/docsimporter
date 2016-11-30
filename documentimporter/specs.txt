@@ -12,7 +12,7 @@ $CONTENT_SYSTEM_PATH - for the document content. In case is missing it will be s
 $DOCUMENT_TYPE - for document type. In case is missing, a default will be used.
 $DUPLICATE_SEARCH_CRITERIA - to search for duplicates. The value is a free text, representing a specific query to search by some attributes.
 Example:dm_document where r_object_id=$r_object_id. <document type> where <attribute_name>=$<attribute_name>
-
+-in case of repeating values they will be delimited by ; character and included inside double quotes.
 - the targeted repository credentials MUST be provided only in command line (NEVER stored them).
 - NICE TO HAVE: graphical user interface
 
