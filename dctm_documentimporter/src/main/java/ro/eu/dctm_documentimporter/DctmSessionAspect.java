@@ -24,6 +24,26 @@ public class DctmSessionAspect {
 	@Autowired
 	private Environment env;
 
+	@Before("execution(* ro.eu.dctm_documentimporter.DctmRepositoryMetadataConvertor.*(..))")
+	public void setDctmRepositoryMetadataConvertorSession(JoinPoint joinPoint)
+			throws DfIdentityException, DfAuthenticationException, DfPrincipalException, DfServiceException {
+		IDctmSession dctmSession = (IDctmSession) joinPoint.getTarget();
+		try {
+			dctmSession.setSession(sessionManager.getSession(env.getProperty("dctm.docbase")));
+			logger.debug("aspect setSession " + dctmSession.getSession());
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	@After("execution(* ro.eu.dctm_documentimporter.DctmRepositoryMetadataConvertor.*(..))")
+	public void releaseDctmRepositoryMetadataConvertorSession(JoinPoint joinPoint)
+			throws DfIdentityException, DfAuthenticationException, DfPrincipalException, DfServiceException {
+		IDctmSession dctmSession = (IDctmSession) joinPoint.getTarget();
+		logger.debug("aspect releaseSession " + dctmSession.getSession());
+		sessionManager.release(dctmSession.getSession());
+	}
+	
 	@Before("execution(* ro.eu.dctm_documentimporter.DctmRepositoryDocumentDAO.*(..))")
 	public void setSession(JoinPoint joinPoint)
 			throws DfIdentityException, DfAuthenticationException, DfPrincipalException, DfServiceException {
