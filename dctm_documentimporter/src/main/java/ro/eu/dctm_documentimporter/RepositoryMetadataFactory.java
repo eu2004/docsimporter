@@ -15,6 +15,8 @@ public class RepositoryMetadataFactory {
 		metadata.setName(attribute.getName());
 		RepositoryMetadataType type = getType(attribute);
 		metadata.setType(type);
+		metadata.setLength(attribute.getLength());
+		metadata.setRepeating(attribute.isRepeating());
 		return metadata;
 	}
 
