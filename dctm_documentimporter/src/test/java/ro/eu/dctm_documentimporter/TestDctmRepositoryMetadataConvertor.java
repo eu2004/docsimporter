@@ -149,8 +149,18 @@ public class TestDctmRepositoryMetadataConvertor {
 				RepositoryMetadataType.INTEGER };
 
 		int index = 0;
+		// check type
 		for (Entry<String, RepositoryMetadata> entry : attributesDefinition.entrySet()) {
 			Assert.assertEquals(entry.getKey(), expectedTypes[index++], entry.getValue().getType());
+		}
+
+		// check isRepeating
+		String[] repeatingAttributes = new String[] { "a_expiration_date", "a_extended_properties", "a_effective_label",
+				"a_effective_date", "a_effective_flag", "r_composite_id", "r_composite_label", "r_component_label",
+				"a_publish_formats", "r_aspect_name", "i_folder_id", "authors", "r_version_label", "i_retainer_id",
+				"keywords", "r_order_no" };
+		for (String repeatingAttribute : repeatingAttributes) {
+			Assert.assertTrue(repeatingAttribute, attributesDefinition.get(repeatingAttribute).isRepeating());
 		}
 	}
 }
