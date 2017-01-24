@@ -32,6 +32,9 @@ public class DctmRepositoryDocumentDAO implements RepositoryDocumentDAO, IDctmSe
 
 	@Override
 	public RepositoryDocument getDocumentByCriteria(String findCriteria) throws RepositoryException {
+		if (findCriteria == null) {
+			return null;//TODO made use of optional
+		}
 		IDfPersistentObject object;
 		try {
 			object = session.getObjectByQualification(findCriteria);

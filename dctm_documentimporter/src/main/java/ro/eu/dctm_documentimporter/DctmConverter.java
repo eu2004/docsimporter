@@ -42,7 +42,7 @@ public class DctmConverter {
 
 	public DctmDocument convert(IDfPersistentObject source, DctmDocument destination) {
 		if (source == null || destination == null) {
-			return destination;
+			return null;//TODO make use of Optional
 		}
 
 		try {
