@@ -1,5 +1,7 @@
 package ro.eu.dctm_documentimporter;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -23,6 +25,12 @@ public class DctmRepositoryDocumentConvertor implements RepositoryDocumentConver
 	private RepositoryMetadataConvertor repositoryMetadataConvertor;
 
 	private Map<String, Map<String, RepositoryMetadata>> dctmTypesCache = new HashMap<>();
+	private ThreadLocal<SimpleDateFormat> simpleDateFormat = new ThreadLocal<SimpleDateFormat>() {
+		@Override
+		protected SimpleDateFormat initialValue() {
+			return new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+		}
+	};
 
 	@Override
 	public RepositoryDocument convert(Map<String, String> csvRecord) throws RepositoryException {
@@ -34,10 +42,31 @@ public class DctmRepositoryDocumentConvertor implements RepositoryDocumentConver
 
 		for (Entry<String, String> cell : csvRecord.entrySet()) {
 			RepositoryEntityAttribute attributeValue = new RepositoryEntityAttribute();
-			attributeValue.setMetadata(dctmTypesCache.get(csvRecord.get("r_object_type")).get(cell.getKey()));
-			attributeValue.setValue(cell.getValue());
+			RepositoryMetadata attributeDefinition = dctmTypesCache.get(csvRecord.get("r_object_type"))
+					.get(cell.getKey());
+			attributeValue.setMetadata(attributeDefinition);
+			try {
+				attributeValue.setValue(getCellValue(attributeDefinition, cell.getValue()));
+			} catch (ParseException e) {
+				throw new RepositoryException(e);
+			}
 			document.setAttributeValue(attributeValue);
 		}
 		return document;
+	}
+
+	private Object getCellValue(RepositoryMetadata attributeDefinition, String value) throws ParseException {
+		switch (attributeDefinition.getType()) {
+		case BOOLEAN:
+			return Boolean.valueOf(value);
+		case DOUBLE:
+			return Double.valueOf(value);
+		case INTEGER:
+			return Integer.valueOf(value);
+		case DATE:
+			return simpleDateFormat.get().parse(value);
+		default:
+			return value;
+		}
 	}
 }

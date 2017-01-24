@@ -39,8 +39,8 @@ public class TestDctmRepositoryDocumentConvertor {
 		Assert.assertNotNull(document);
 		for (Entry<String, String> attribute : csvRecord.entrySet()) {
 			if ("r_creation_date".equals(attribute.getKey())) {
-				Assert.assertEquals(r_creation_date.getTime(),
-						((Date) document.getValue(attribute.getKey())).getTime());
+				Assert.assertEquals(simpleDateFormat.format(r_creation_date),
+						simpleDateFormat.format((Date) document.getValue(attribute.getKey())));
 			} else {
 				Assert.assertEquals(attribute.getValue(), document.getValue(attribute.getKey()).toString());
 			}
