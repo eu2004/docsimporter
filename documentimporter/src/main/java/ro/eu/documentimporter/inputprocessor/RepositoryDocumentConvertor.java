@@ -1,12 +1,12 @@
 package ro.eu.documentimporter.inputprocessor;
 
-import org.apache.commons.csv.CSVRecord;
+import java.util.Map;
 
 import ro.eu.documentimporter.repository.RepositoryException;
 import ro.eu.documentimporter.repository.model.RepositoryDocument;
 
 public interface RepositoryDocumentConvertor {
 
-	public RepositoryDocument convert(CSVRecord csvRecord) throws RepositoryException ;
+	public RepositoryDocument convert(Map<String, String> csvRecord) throws RepositoryException ;
 
 }

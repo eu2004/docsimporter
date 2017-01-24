@@ -16,7 +16,7 @@
 		<apache.poi.version>3.14</apache.poi.version>
 		<maven-compiler-plugin.version>2.3.1</maven-compiler-plugin.version>
 		<java.version>1.8</java.version>
-		<org.mockito.version>1.9.5</org.mockito.version>
+		<org.mockito.version>2.0.2-beta</org.mockito.version>
 		<org.aspectj.version>1.6.11</org.aspectj.version>
 		<commons-csv.version>1.4</commons-csv.version>
 	</properties>
@@ -93,8 +93,7 @@
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
-			<version>${org.mockito.version}</version>
-			<scope>test</scope>
+			<version>2.0.2-beta</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-csv -->

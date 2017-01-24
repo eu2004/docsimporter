@@ -17,18 +17,24 @@ public class CSVInputParser {
 	@Autowired
 	private RepositoryDocumentConvertor repositoryDocumentConvertor;
 
+	/**
+	 * Parse the csv file with the following settings:
+	 *  withDelimiter(',')
+	 *  withQuote('"')
+	 *  withRecordSeparator("\r\n")
+	 *  withIgnoreEmptyLines(true)
+	 *  withHeader()
+	 *  
+	 * @param csvReader
+	 * @throws IOException
+	 */
 	public void parseCSV(Reader csvReader) throws IOException {
-		try (CSVParser parser = new CSVParser(csvReader, CSVFormat.DEFAULT)) {
+		try (CSVParser parser = new CSVParser(csvReader, CSVFormat.DEFAULT.withHeader())) {
 			Iterator<CSVRecord> csvRecordIterator = parser.iterator();
-			// skip header
-			if (csvRecordIterator.hasNext()) {
-				csvRecordIterator.next();
-			}
-
 			// parse content
 			while (csvRecordIterator.hasNext()) {
-				rowParserCallback.processRepositoryDocument(
-						repositoryDocumentConvertor.convert(csvRecordIterator.next()));
+				rowParserCallback
+						.processRepositoryDocument(repositoryDocumentConvertor.convert(csvRecordIterator.next().toMap()));
 			}
 		}
 	}
