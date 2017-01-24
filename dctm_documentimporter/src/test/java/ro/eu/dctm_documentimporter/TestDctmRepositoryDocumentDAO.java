@@ -35,14 +35,19 @@ public class TestDctmRepositoryDocumentDAO {
 
 	@Test
 	public void testGetDocumentById() throws Exception {
-		String expectedId = "0900000c80000430";
+		DctmDocument newDocument = new DctmDocument();
+		newDocument.setObjectName("test_" + System.currentTimeMillis());
+		newDocument.setType("dm_document");
+		DctmDocument document = (DctmDocument) dctmRepositoryDocumentDAO.createDocument(newDocument);
+		String expectedId = document.getId();
+		
 		RepositoryEntityIdAttribute id = new RepositoryEntityIdAttribute();
 		id.setValue(expectedId);
 		RepositoryMetadata metadata = new RepositoryMetadata();
 		metadata.setName("r_object_id");
 		metadata.setType(RepositoryMetadataType.STRING);
 		id.setMetadata(metadata);
-		DctmDocument document = (DctmDocument) dctmRepositoryDocumentDAO.getDocumentById(id);
+		document = (DctmDocument) dctmRepositoryDocumentDAO.getDocumentById(id);
 		Assert.assertTrue(document != null);
 		Assert.assertTrue(expectedId.equals(document.getId()));
 	}
