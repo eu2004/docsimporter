@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
+import ro.eu.documentimporter.inputprocessor.CSVRowParserCallback;
+import ro.eu.documentimporter.inputprocessor.RepositoryDocumentConvertor;
 import ro.eu.documentimporter.repository.RepositoryDocumentDAO;
 import ro.eu.documentimporter.repository.RepositoryDocumentService;
 
@@ -16,17 +18,23 @@ import ro.eu.documentimporter.repository.RepositoryDocumentService;
  * Created by emilu on 5/22/2016.
  */
 @Configuration
-@ComponentScan
+@ComponentScan("ro.eu.documentimporter")
 @PropertySource("classpath:test-app.properties")
 public class TestApplicationSpringConfiguration {
 	@Autowired
 	private Environment environment;
 
 	@Mock
-	private DocumentImporterAppConfiguration applicationConfiguration;
+	private IDocumentImporterAppConfiguration applicationConfiguration;
 
 	@Mock
 	private RepositoryDocumentDAO repositoryDocumentDAO;
+	
+	@Mock
+	private CSVRowParserCallback rowParserCallback;
+	
+	@Mock
+	private RepositoryDocumentConvertor repositoryDocumentConvertor;
 
 	// init mockito
 	{
@@ -39,12 +47,22 @@ public class TestApplicationSpringConfiguration {
 	}
 
 	@Bean(name = "applicationConfiguration")
-	public DocumentImporterAppConfiguration applicationConfiguration() {
+	public IDocumentImporterAppConfiguration applicationConfiguration() {
 		return applicationConfiguration;
 	}
 
 	@Bean(name = "repositoryDocumentService")
 	public RepositoryDocumentService repositoryDocumentService() {
 		return new RepositoryDocumentService();
+	}
+	
+	@Bean(name = "rowParserCallback")
+	public CSVRowParserCallback rowParserCallback() {
+		return rowParserCallback;
+	}
+	
+	@Bean(name = "repositoryDocumentConvertor")
+	public RepositoryDocumentConvertor repositoryDocumentConvertor() {
+		return repositoryDocumentConvertor;
 	}
 }

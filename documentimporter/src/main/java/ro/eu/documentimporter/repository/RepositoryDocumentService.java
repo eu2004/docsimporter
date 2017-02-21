@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ro.eu.documentimporter.DocumentImporterAppConfiguration;
+import ro.eu.documentimporter.IDocumentImporterAppConfiguration;
 import ro.eu.documentimporter.repository.model.RepositoryDocument;
 import ro.eu.documentimporter.repository.model.RepositoryEntityIdAttribute;
 
@@ -13,7 +13,7 @@ public class RepositoryDocumentService {
 	private static final Logger logger = Logger.getLogger(RepositoryDocumentService.class);
 
 	@Autowired
-	private DocumentImporterAppConfiguration applicationConfiguration;
+	private IDocumentImporterAppConfiguration applicationConfiguration;
 
 	@Autowired
 	private RepositoryDocumentDAO repositoryDocumentDAO;
@@ -65,11 +65,11 @@ public class RepositoryDocumentService {
 		return repositoryDocumentDAO;
 	}
 
-	public DocumentImporterAppConfiguration getApplicationConfiguration() {
+	public IDocumentImporterAppConfiguration getApplicationConfiguration() {
 		return applicationConfiguration;
 	}
 
-	public void setApplicationConfiguration(DocumentImporterAppConfiguration applicationConfiguration) {
+	public void setApplicationConfiguration(IDocumentImporterAppConfiguration applicationConfiguration) {
 		this.applicationConfiguration = applicationConfiguration;
 	}
 

@@ -1,4 +1,4 @@
-mvn install:install-file -Dfile=C:/Users/emilu/git-documentimporter/dctm_documentimporter/lib/dfc.jar -DgroupId=dctm -DartifactId=dfc -Dversion=7.1 -Dpackaging=jar -DgeneratePom=true
-mvn install:install-file -Dfile=c:/Users/emilu/git-documentimporter/dctm_documentimporter/lib/cryptojcommon.jar -DgroupId=dctm -DartifactId=cryptojcommon -Dversion=7.1 -Dpackaging=jar -DgeneratePom=true
-mvn install:install-file -Dfile=c:/Users/emilu/git-documentimporter/dctm_documentimporter/lib/certj.jar -DgroupId=dctm -DartifactId=certj -Dversion=7.1 -Dpackaging=jar -DgeneratePom=true
-mvn install:install-file -Dfile=c:/Users/emilu/git-documentimporter/dctm_documentimporter/lib/jcmFIPS.jar -DgroupId=dctm -DartifactId=jcmFIPS -Dversion=7.1 -Dpackaging=jar -DgeneratePom=true
+mvn install:install-file -Dfile=D:/git-documentimporter/dctm_documentimporter/lib/dfc.jar -DgroupId=dctm -DartifactId=dfc -Dversion=7.1 -Dpackaging=jar -DgeneratePom=true
+mvn install:install-file -Dfile=D:/git-documentimporter/dctm_documentimporter/lib/cryptojcommon.jar -DgroupId=dctm -DartifactId=cryptojcommon -Dversion=7.1 -Dpackaging=jar -DgeneratePom=true
+mvn install:install-file -Dfile=D:/git-documentimporter/dctm_documentimporter/lib/certj.jar -DgroupId=dctm -DartifactId=certj -Dversion=7.1 -Dpackaging=jar -DgeneratePom=true
+mvn install:install-file -Dfile=D:/git-documentimporter/dctm_documentimporter/lib/jcmFIPS.jar -DgroupId=dctm -DartifactId=jcmFIPS -Dversion=7.1 -Dpackaging=jar -DgeneratePom=true

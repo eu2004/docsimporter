@@ -1,15 +1,15 @@
-package ro.eu.documentimporter;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
+package ro.eu.documentimporter_launcher;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
+import ro.eu.documentimporter.ExistingDocumentImporterActions;
+import ro.eu.documentimporter.IDocumentImporterAppConfiguration;
+
 @Component
 @PropertySource("classpath:app.properties")
-public class DocumentImporterAppConfiguration {
+public class DocumentImporterAppConfiguration implements IDocumentImporterAppConfiguration{
 	@Value("${importer.action.in.case.exists}")
 	private String importerActionInCaseExists;
 
@@ -22,30 +22,5 @@ public class DocumentImporterAppConfiguration {
 
 	public String getImporterInputDocName() {
 		return importerInputDocName;
-	}
-
-	public static enum ExistingDocumentImporterActions {
-		VERSION("VERSION"), UPDATE("UPDATE"), NEW("CREATE"), IGNORE("SKIP"), REPLACE("REPLACE");
-
-		private static Map<String, ExistingDocumentImporterActions> actionsMap = new LinkedHashMap<>(1);
-		private String actionName;
-
-		private ExistingDocumentImporterActions(String actionName) {
-			this.actionName = actionName;
-		}
-
-		public String getActionName() {
-			return actionName;
-		}
-
-		static {
-			for (ExistingDocumentImporterActions value : ExistingDocumentImporterActions.values()) {
-				actionsMap.put(value.actionName, value);
-			}
-		}
-
-		public static ExistingDocumentImporterActions findByActionName(String actionName) {
-			return actionsMap.get(actionName);
-		}
 	}
 }

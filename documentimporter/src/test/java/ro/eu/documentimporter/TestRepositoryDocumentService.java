@@ -17,7 +17,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import ro.eu.documentimporter.DocumentImporterAppConfiguration.ExistingDocumentImporterActions;
 import ro.eu.documentimporter.repository.RepositoryDocumentDAO;
 import ro.eu.documentimporter.repository.RepositoryDocumentService;
 import ro.eu.documentimporter.repository.RepositoryDocumentServiceException;
@@ -43,7 +42,7 @@ public class TestRepositoryDocumentService {
 	public void testImportDocumentWithCreateNew() throws RepositoryException {
 		// given
 		final RepositoryDocument inputDoc = new RepositoryDocument();
-
+		inputDoc.setFindCriteria("find criteria");
 		final RepositoryDocument expectedDoc = new RepositoryDocument();
 		RepositoryEntityIdAttribute id = new RepositoryEntityIdAttribute();
 		id.setValue("00000000000000000000");
@@ -74,12 +73,14 @@ public class TestRepositoryDocumentService {
 	@Test
 	public void testImportDocumentWithIgnore() throws RepositoryException {
 		// given
+		final RepositoryDocument inputDoc = new RepositoryDocument();
+		inputDoc.setFindCriteria("find criteria");
 		when(mockedRepositoryDocumentService.getRepositoryDocumentDAO().getDocumentByCriteria(anyString()))
-				.thenReturn(new RepositoryDocument());
+				.thenReturn(inputDoc);
 		when(mockedRepositoryDocumentService.getApplicationConfiguration().getImporterActionInCaseExists())
 				.thenReturn(ExistingDocumentImporterActions.IGNORE);
 		// when
-		RepositoryEntityIdAttribute docId = mockedRepositoryDocumentService.importDocument(new RepositoryDocument());
+		RepositoryEntityIdAttribute docId = mockedRepositoryDocumentService.importDocument(inputDoc);
 		// then
 		Assert.assertNull(docId);
 		verify(mockedRepositoryDocumentService.getRepositoryDocumentDAO(), times(1)).getDocumentByCriteria(anyString());
@@ -97,6 +98,7 @@ public class TestRepositoryDocumentService {
 	public void testImportDocumentWithVersion() throws RepositoryException {
 		// given
 		final RepositoryDocument inputDoc = new RepositoryDocument();
+		inputDoc.setFindCriteria("find criteria");
 		final RepositoryDocument expectedDoc = new RepositoryDocument();
 		RepositoryEntityIdAttribute id = new RepositoryEntityIdAttribute();
 		id.setValue("00000000000000000000");
@@ -131,6 +133,7 @@ public class TestRepositoryDocumentService {
 	public void testImportDocumentWithUpdate() {
 		// given
 		final RepositoryDocument inputDoc = new RepositoryDocument();
+		inputDoc.setFindCriteria("find criteria");
 		final RepositoryDocument expectedDoc = new RepositoryDocument();
 		RepositoryEntityIdAttribute id = new RepositoryEntityIdAttribute();
 		id.setValue("00000000000000000000");
@@ -165,6 +168,7 @@ public class TestRepositoryDocumentService {
 	public void testImportDocumentWithReplace() {
 		// given
 		final RepositoryDocument inputDoc = new RepositoryDocument();
+		inputDoc.setFindCriteria("find criteria");
 		final RepositoryDocument expectedDoc = new RepositoryDocument();
 		RepositoryEntityIdAttribute id = new RepositoryEntityIdAttribute();
 		id.setValue("00000000000000000000");
@@ -199,6 +203,7 @@ public class TestRepositoryDocumentService {
 	public void testImportDocumentWithNoAction() {
 		// given
 		final RepositoryDocument inputDoc = new RepositoryDocument();
+		inputDoc.setFindCriteria("find criteria");
 		final RepositoryDocument expectedDoc = new RepositoryDocument();
 		RepositoryEntityIdAttribute id = new RepositoryEntityIdAttribute();
 		id.setValue("00000000000000000000");
@@ -233,6 +238,7 @@ public class TestRepositoryDocumentService {
 	public void testImportDocumentWithError() {
 		// given
 		final RepositoryDocument inputDoc = new RepositoryDocument();
+		inputDoc.setFindCriteria("find criteria");
 		final RepositoryDocument expectedDoc = new RepositoryDocument();
 		RepositoryEntityIdAttribute id = new RepositoryEntityIdAttribute();
 		id.setValue("00000000000000000000");
