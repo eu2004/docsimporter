@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
+import ro.eu.documentimporter.IDocumentImporterAppConfiguration;
 import ro.eu.documentimporter.repository.RepositoryDocumentService;
-import ro.eu.documentimporter_launcher.DocumentImporterAppConfiguration;
 
 /**
  * Created by emilu on 5/22/2016.
@@ -22,11 +22,11 @@ public class TestDctmApplicationConfiguration {
 	private Environment env;
 	
 	@Mock
-	private DocumentImporterAppConfiguration applicationConfiguration;
+	private IDocumentImporterAppConfiguration applicationConfiguration;
 
 	
 	@Bean(name = "applicationConfiguration")
-	public DocumentImporterAppConfiguration applicationConfiguration() {
+	public IDocumentImporterAppConfiguration applicationConfiguration() {
 		return applicationConfiguration;
 	}
 
