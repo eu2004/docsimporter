@@ -77,8 +77,7 @@ public class TestRepositoryDocumentService {
 		inputDoc.setFindCriteria("find criteria");
 		when(repositoryDocumentService.getRepositoryDocumentDAO().getDocumentByCriteria(anyString()))
 				.thenReturn(inputDoc);
-		when(repositoryDocumentService.getImporterActionInCaseExists())
-				.thenReturn(ExistingDocumentImporterActions.IGNORE);
+		repositoryDocumentService.setImporterActionInCaseExists("IGNORE");
 		// when
 		RepositoryEntityIdAttribute docId = repositoryDocumentService.importDocument(inputDoc);
 		// then
@@ -112,8 +111,7 @@ public class TestRepositoryDocumentService {
 				.thenReturn(inputDoc);
 		when(repositoryDocumentService.getRepositoryDocumentDAO().createDocumentNewVersion(inputDoc))
 				.thenReturn(expectedDoc);
-		when(repositoryDocumentService.getImporterActionInCaseExists())
-				.thenReturn(ExistingDocumentImporterActions.VERSION);
+		repositoryDocumentService.setImporterActionInCaseExists("VERSION");
 		// when
 		RepositoryEntityIdAttribute docId = repositoryDocumentService.importDocument(inputDoc);
 		// then
@@ -147,8 +145,7 @@ public class TestRepositoryDocumentService {
 				.thenReturn(inputDoc);
 		when(repositoryDocumentService.getRepositoryDocumentDAO().updateDocument(inputDoc))
 				.thenReturn(expectedDoc);
-		when(repositoryDocumentService.getImporterActionInCaseExists())
-				.thenReturn(ExistingDocumentImporterActions.UPDATE);
+		repositoryDocumentService.setImporterActionInCaseExists("UPDATE");
 		// when
 		RepositoryEntityIdAttribute docId = repositoryDocumentService.importDocument(inputDoc);
 		// then
@@ -182,8 +179,7 @@ public class TestRepositoryDocumentService {
 				.thenReturn(inputDoc);
 		when(repositoryDocumentService.getRepositoryDocumentDAO().replaceDocument(inputDoc))
 				.thenReturn(expectedDoc);
-		when(repositoryDocumentService.getImporterActionInCaseExists())
-				.thenReturn(ExistingDocumentImporterActions.REPLACE);
+		repositoryDocumentService.setImporterActionInCaseExists("REPLACE");
 		// when
 		RepositoryEntityIdAttribute docId = repositoryDocumentService.importDocument(inputDoc);
 		// then
@@ -217,8 +213,8 @@ public class TestRepositoryDocumentService {
 				.thenReturn(inputDoc);
 		when(repositoryDocumentService.getRepositoryDocumentDAO().updateDocument(inputDoc))
 				.thenReturn(expectedDoc);
-		when(repositoryDocumentService.getImporterActionInCaseExists())
-				.thenReturn(null);
+		repositoryDocumentService.setImporterActionInCaseExists("");
+		
 		// when
 		RepositoryEntityIdAttribute docId = repositoryDocumentService.importDocument(inputDoc);
 		// then
