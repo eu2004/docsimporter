@@ -75,7 +75,7 @@ public class RepositoryDocumentService {
 		this.repositoryDocumentDAO = repositoryDocumentDAO;
 	}
 
-	public void setImporterActionInCaseExists(String importerActionInCaseExists) {
+	public void setImporterActionInCaseExistsStr(String importerActionInCaseExists) {
 		this.importerActionInCaseExists = importerActionInCaseExists;
 	}
 }
