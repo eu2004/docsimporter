@@ -1,1 +1,5 @@
 The document exporter should be able to do the followings:
+- export documents content.
+- export documents metadata into a csv file that can be processed by the document importer app. The csv file should contain also possibility to define the relation between the metadata and the content.
+- the export can be done based on any data extraction criteria (sql/dql,platform specific..)
+- ...
