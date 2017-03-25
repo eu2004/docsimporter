@@ -2,19 +2,21 @@ package ro.eu.documentimporter.repository;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
-import ro.eu.documentimporter.IDocumentImporterAppConfiguration;
+import ro.eu.documentimporter.ExistingDocumentImporterActions;
 import ro.eu.documentimporter.repository.model.RepositoryDocument;
 import ro.eu.documentimporter.repository.model.RepositoryEntityIdAttribute;
 
 @Service
+@PropertySource("classpath:app.properties")
 public class RepositoryDocumentService {
 	private static final Logger logger = Logger.getLogger(RepositoryDocumentService.class);
-
-	@Autowired
-	private IDocumentImporterAppConfiguration applicationConfiguration;
-
+	@Value("${importer.action.in.case.exists}")
+	private String importerActionInCaseExists;
+	
 	@Autowired
 	private RepositoryDocumentDAO repositoryDocumentDAO;
 
@@ -31,13 +33,13 @@ public class RepositoryDocumentService {
 				logger.debug(document + " not exists create a new document");
 				return repositoryDocumentDAO.createDocument(document).getIdAttributeValue();
 			} else {
-				if (applicationConfiguration.getImporterActionInCaseExists() == null) {
+				if (getImporterActionInCaseExists() == null) {
 					logger.error(document
 							+ " already exists but no action found for it. Please check application configuration file.");
 					return null;
 				}
 
-				switch (applicationConfiguration.getImporterActionInCaseExists()) {
+				switch (getImporterActionInCaseExists()) {
 				case NEW:
 					logger.debug(document + " already exists but create a new document");
 					return repositoryDocumentDAO.createDocument(document).getIdAttributeValue();
@@ -65,12 +67,8 @@ public class RepositoryDocumentService {
 		return repositoryDocumentDAO;
 	}
 
-	public IDocumentImporterAppConfiguration getApplicationConfiguration() {
-		return applicationConfiguration;
-	}
-
-	public void setApplicationConfiguration(IDocumentImporterAppConfiguration applicationConfiguration) {
-		this.applicationConfiguration = applicationConfiguration;
+	public ExistingDocumentImporterActions getImporterActionInCaseExists() {
+		return ExistingDocumentImporterActions.findByActionName(importerActionInCaseExists);
 	}
 
 	public void setRepositoryDocumentDAO(RepositoryDocumentDAO repositoryDocumentDAO) {

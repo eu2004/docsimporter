@@ -7,24 +7,14 @@ import java.util.Iterator;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component
-public class CSVInputParser {
-	@Autowired
-	private CSVRowParserCallback rowParserCallback;
-	@Autowired
-	private RepositoryDocumentConvertor repositoryDocumentConvertor;
+public abstract class CSVInputParser {
 
 	/**
-	 * Parse the csv file with the following settings:
-	 *  withDelimiter(',')
-	 *  withQuote('"')
-	 *  withRecordSeparator("\r\n")
-	 *  withIgnoreEmptyLines(true)
-	 *  withHeader()
-	 *  
+	 * Parse the csv file with the following settings: withDelimiter(',')
+	 * withQuote('"') withRecordSeparator("\r\n") withIgnoreEmptyLines(true)
+	 * withHeader()
+	 * 
 	 * @param csvReader
 	 * @throws IOException
 	 */
@@ -33,9 +23,13 @@ public class CSVInputParser {
 			Iterator<CSVRecord> csvRecordIterator = parser.iterator();
 			// parse content
 			while (csvRecordIterator.hasNext()) {
-				rowParserCallback
-						.processRepositoryDocument(repositoryDocumentConvertor.convert(csvRecordIterator.next().toMap()));
+				getRowParserCallback().processRepositoryDocument(
+						getRepositoryDocumentConvertor().convert(csvRecordIterator.next().toMap()));
 			}
 		}
 	}
+
+	public abstract CSVRowParserCallback getRowParserCallback();
+
+	public abstract RepositoryDocumentConvertor getRepositoryDocumentConvertor();
 }

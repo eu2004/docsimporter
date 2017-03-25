@@ -1,5 +1,5 @@
 1. Create input processor component
 	- CSV parser - done
 	- factory to create specific repository entities based on the CSV lines - done
-	- DctmCSVRowParserCallback - work in progress
+	- DctmCSVRowParserCallback - done
 	- *TestCSVInputParser to implement

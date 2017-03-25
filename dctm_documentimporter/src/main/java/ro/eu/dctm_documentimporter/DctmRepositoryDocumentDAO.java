@@ -3,7 +3,7 @@ package ro.eu.dctm_documentimporter;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.documentum.com.DfClientX;
 import com.documentum.com.IDfClientX;
@@ -19,7 +19,7 @@ import ro.eu.documentimporter.repository.RepositoryException;
 import ro.eu.documentimporter.repository.model.RepositoryDocument;
 import ro.eu.documentimporter.repository.model.RepositoryEntityIdAttribute;
 
-@Component
+@Repository
 @Scope("prototype")
 public class DctmRepositoryDocumentDAO implements RepositoryDocumentDAO, IDctmSession {
 	private static final Logger logger = Logger.getLogger(DctmRepositoryDocumentDAO.class);

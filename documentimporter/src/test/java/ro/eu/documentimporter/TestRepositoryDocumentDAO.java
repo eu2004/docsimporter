@@ -17,7 +17,7 @@ import ro.eu.documentimporter.repository.model.RepositoryDocument;
 import ro.eu.documentimporter.repository.model.RepositoryEntityIdAttribute;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = TestApplicationSpringConfiguration.class, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = TestApplicationConfiguration.class, loader = AnnotationConfigContextLoader.class)
 public class TestRepositoryDocumentDAO {
 	@Autowired
 	private RepositoryDocumentDAO mokedRepositoryDocumentDAO;

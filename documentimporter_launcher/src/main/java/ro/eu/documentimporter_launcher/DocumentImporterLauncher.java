@@ -7,7 +7,7 @@ public class DocumentImporterLauncher {
 
 	public static void main(String... args) {
 		// launch app
-		ApplicationContext context = new AnnotationConfigApplicationContext(SpringApplicationConfiguration.class);
+		ApplicationContext context = new AnnotationConfigApplicationContext(DocumentImporterLauncherAppConfig.class);
 		context.getBean(DocumentImporterExecutor.class).execute();
 	}
 }

@@ -1,18 +1,14 @@
 package ro.eu.dctm_documentimporter;
 
-import static org.mockito.Mockito.when;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import ro.eu.documentimporter.IDocumentImporterAppConfiguration;
 import ro.eu.documentimporter.repository.RepositoryDocumentDAO;
 import ro.eu.documentimporter.repository.model.RepositoryEntityAttribute;
 import ro.eu.documentimporter.repository.model.RepositoryMetadata;
@@ -26,13 +22,6 @@ public class TestDctmCSVRowParserCallback {
 	@Autowired
 	private RepositoryDocumentDAO dctmRepositoryDocumentDAO;
 	
-	@Mock
-	private IDocumentImporterAppConfiguration applicationConfiguration;
-	// init mockito
-	{
-		MockitoAnnotations.initMocks(this);
-	}
-
 	@Test
 	public void testProcessRepositoryDocumentCreateNew() {
 		// given
@@ -60,8 +49,6 @@ public class TestDctmCSVRowParserCallback {
 		document.setFindCriteria(findCriteria);
 
 		// when
-		when(applicationConfiguration.getImporterActionInCaseExists()).thenReturn(null);
-		callback.getDctmRepositoryDocumentService().setApplicationConfiguration(applicationConfiguration);
 		callback.processRepositoryDocument(document);
 		RepositoryEntityAttribute subjectAttribute = new RepositoryEntityAttribute();
 		RepositoryMetadata subjectAttributeDefinition = new RepositoryMetadata();

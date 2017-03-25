@@ -6,7 +6,9 @@ import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
 
 import com.documentum.fc.client.DfAuthenticationException;
 import com.documentum.fc.client.DfIdentityException;
@@ -14,7 +16,9 @@ import com.documentum.fc.client.DfPrincipalException;
 import com.documentum.fc.client.DfServiceException;
 import com.documentum.fc.client.IDfSessionManager;
 
+@Component
 @Aspect
+@PropertySource("classpath:app.properties")
 public class DctmSessionAspect {
 	private static final Logger logger = Logger.getLogger(DctmSessionAspect.class);
 
@@ -29,7 +33,7 @@ public class DctmSessionAspect {
 			throws DfIdentityException, DfAuthenticationException, DfPrincipalException, DfServiceException {
 		IDctmSession dctmSession = (IDctmSession) joinPoint.getTarget();
 		try {
-			dctmSession.setSession(sessionManager.getSession(env.getProperty("dctm.docbase")));
+			dctmSession.setSession(sessionManager.getSession(env.getProperty("repository.name")));
 			logger.debug("aspect setSession " + dctmSession.getSession());
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -49,7 +53,7 @@ public class DctmSessionAspect {
 			throws DfIdentityException, DfAuthenticationException, DfPrincipalException, DfServiceException {
 		IDctmSession dctmSession = (IDctmSession) joinPoint.getTarget();
 		try {
-			dctmSession.setSession(sessionManager.getSession(env.getProperty("dctm.docbase")));
+			dctmSession.setSession(sessionManager.getSession(env.getProperty("repository.name")));
 			logger.debug("aspect setSession " + dctmSession.getSession());
 		} catch (Exception ex) {
 			ex.printStackTrace();

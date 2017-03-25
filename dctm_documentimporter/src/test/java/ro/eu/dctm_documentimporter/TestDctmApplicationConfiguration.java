@@ -1,37 +1,31 @@
 package ro.eu.dctm_documentimporter;
 
-import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 
-import ro.eu.documentimporter.IDocumentImporterAppConfiguration;
-import ro.eu.documentimporter.repository.RepositoryDocumentService;
+import ro.eu.documentimporter.DocumentImporterAppConfig;
 
 /**
  * Created by emilu on 5/22/2016.
  */
 @Configuration
-@Import({ DctmApplicationConfiguration.class })
-@PropertySource("classpath:test-app.properties")
+@Import({ DocumentImporterAppConfig.class, DctmAppConfig.class })
+@PropertySource("classpath:app.properties")
 public class TestDctmApplicationConfiguration {
-	@Autowired
-	private Environment env;
 	
-	@Mock
-	private IDocumentImporterAppConfiguration applicationConfiguration;
-
 	
-	@Bean(name = "applicationConfiguration")
-	public IDocumentImporterAppConfiguration applicationConfiguration() {
-		return applicationConfiguration;
-	}
-
-	@Bean(name = "repositoryDocumentService")
-	public RepositoryDocumentService repositoryDocumentService() {
-		return new RepositoryDocumentService();
-	}
+	public static void main(String[] args) {
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+        try {
+            ctx.register(DctmAppConfig.class);
+            ctx.refresh();
+           
+            System.out.println("DctmRepositoryDocumentDAO: "
+                    + ctx.getBean("dctmRepositoryDocumentDAO"));
+        } finally {
+            ctx.close();
+        }
+    }
 }

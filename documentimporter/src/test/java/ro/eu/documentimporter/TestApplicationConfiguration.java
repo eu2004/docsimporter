@@ -12,20 +12,16 @@ import org.springframework.core.env.Environment;
 import ro.eu.documentimporter.inputprocessor.CSVRowParserCallback;
 import ro.eu.documentimporter.inputprocessor.RepositoryDocumentConvertor;
 import ro.eu.documentimporter.repository.RepositoryDocumentDAO;
-import ro.eu.documentimporter.repository.RepositoryDocumentService;
 
 /**
  * Created by emilu on 5/22/2016.
  */
 @Configuration
-@ComponentScan("ro.eu.documentimporter")
-@PropertySource("classpath:test-app.properties")
-public class TestApplicationSpringConfiguration {
+@ComponentScan(basePackages = {"ro.eu.documentimporter"})
+@PropertySource("classpath:app.properties")
+public class TestApplicationConfiguration {
 	@Autowired
 	private Environment environment;
-
-	@Mock
-	private IDocumentImporterAppConfiguration applicationConfiguration;
 
 	@Mock
 	private RepositoryDocumentDAO repositoryDocumentDAO;
@@ -44,16 +40,6 @@ public class TestApplicationSpringConfiguration {
 	@Bean(name = "repositoryDocumentDAO")
 	public RepositoryDocumentDAO repositoryDocumentDAO() {
 		return repositoryDocumentDAO;
-	}
-
-	@Bean(name = "applicationConfiguration")
-	public IDocumentImporterAppConfiguration applicationConfiguration() {
-		return applicationConfiguration;
-	}
-
-	@Bean(name = "repositoryDocumentService")
-	public RepositoryDocumentService repositoryDocumentService() {
-		return new RepositoryDocumentService();
 	}
 	
 	@Bean(name = "rowParserCallback")
