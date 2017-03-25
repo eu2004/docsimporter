@@ -35,6 +35,34 @@
 			<artifactId>documentimporter</artifactId>
 			<version>${documentimporter.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>dctm</groupId>
+			<artifactId>dfc</artifactId>
+			<version>${dctm.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>dctm</groupId>
+			<artifactId>cryptojcommon</artifactId>
+			<version>${dctm.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>dctm</groupId>
+			<artifactId>certj</artifactId>
+			<version>${dctm.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>dctm</groupId>
+			<artifactId>jcmFIPS</artifactId>
+			<version>${dctm.version}</version>
+			<scope>provided</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>docimporter</groupId>

@@ -19,6 +19,9 @@ public abstract class CSVInputParser {
 	 * @throws IOException
 	 */
 	public void parseCSV(Reader csvReader) throws IOException {
+		if (csvReader == null) {
+			throw new IllegalArgumentException("csvReader cannot be NULL!");
+		}
 		try (CSVParser parser = new CSVParser(csvReader, CSVFormat.DEFAULT.withHeader())) {
 			Iterator<CSVRecord> csvRecordIterator = parser.iterator();
 			// parse content
