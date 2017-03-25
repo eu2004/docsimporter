@@ -1,4 +1,6 @@
 The document transformer should be able to do the followings:
 - process the documents metadata defined into a csv file that can be processed by the document importer app. The csv file should contain also possibility to define the relation between the metadata and the content.
 - can apply some content transformation on the documents content
+- made use of templates/scripts to defined the transformation rules
+- log each action?
 - ...

@@ -7,6 +7,7 @@
 - the importer must be platform independent.
 - the documents to import will be specified into an CSV file where on the first line must be defined the list of attributes of a document.
 - the date values will have the following format: dd.MM.yyyy HH:mm:ss. (example: 30.12.2016 23:15:45)
+- log each action?
 The values are delimited by commas, the values containing comma character must be enclosed within double quotes.
 The order of attributes doesn't matter and at least one attribute must be specified. Some of the attributes must have specific names like:
 $CONTENT_SYSTEM_PATH - for the document content. In case is missing it will be skipped.
