@@ -2,4 +2,5 @@
 	- CSV parser - done
 	- factory to create specific repository entities based on the CSV lines - done
 	- DctmCSVRowParserCallback - done
-	- *TestCSVInputParser to implement
+	- *TestCSVInputParser to implement - in progress, add unit tests for content and rendition
+		process the "$CONTENT_SYSTEM_PATH" and "$RENDTION_PATH"

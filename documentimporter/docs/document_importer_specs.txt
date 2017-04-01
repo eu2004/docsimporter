@@ -11,6 +11,7 @@
 The values are delimited by commas, the values containing comma character must be enclosed within double quotes.
 The order of attributes doesn't matter and at least one attribute must be specified. Some of the attributes must have specific names like:
 $CONTENT_SYSTEM_PATH - for the document content. In case is missing it will be skipped.
+$RENDTION_PATH - for the document rendition. In case is missing it will be skipped. The values are local paths separated by commas.
 $DUPLICATE_SEARCH_CRITERIA - to search for duplicates. The value is a free text, representing a specific query to search by some attributes.
 Example:dm_document where r_object_id=$r_object_id. <document type> where <attribute_name>=$<attribute_name>
 -in case of repeating values they will be delimited by ; character and included inside double quotes.
