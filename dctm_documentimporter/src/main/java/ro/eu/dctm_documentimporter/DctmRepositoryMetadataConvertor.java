@@ -39,6 +39,9 @@ public class DctmRepositoryMetadataConvertor implements RepositoryMetadataConver
 			loadTypeAttributes(type, typeAttributes);
 			Map<String, RepositoryMetadata> metadata = new LinkedHashMap<>();
 			for (Entry<String, String> header : csvRow.entrySet()) {
+				if ("$DUPLICATE_SEARCH_CRITERIA".equals(header.getKey())){
+					continue;
+				}
 				metadata.put(header.getKey(), metadataFactory.create(typeAttributes.get(header.getKey())));
 			}
 			return metadata;

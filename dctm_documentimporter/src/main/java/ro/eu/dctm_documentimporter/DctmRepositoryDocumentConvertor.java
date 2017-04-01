@@ -22,7 +22,7 @@ import ro.eu.documentimporter.repository.model.RepositoryMetadata;
 public class DctmRepositoryDocumentConvertor implements RepositoryDocumentConvertor {
 
 	@Autowired
-	private RepositoryMetadataConvertor repositoryMetadataConvertor;
+	private RepositoryMetadataConvertor dctmRepositoryMetadataConvertor;
 
 	private Map<String, Map<String, RepositoryMetadata>> dctmTypesCache = new HashMap<>();
 	private ThreadLocal<SimpleDateFormat> simpleDateFormat = new ThreadLocal<SimpleDateFormat>() {
@@ -34,16 +34,25 @@ public class DctmRepositoryDocumentConvertor implements RepositoryDocumentConver
 
 	@Override
 	public RepositoryDocument convert(Map<String, String> csvRecord) throws RepositoryException {
-		final RepositoryDocument document = new RepositoryDocument();
-		if (dctmTypesCache.get(csvRecord.get("r_object_type")) == null) {
-			Map<String, RepositoryMetadata> attributesDefinition = repositoryMetadataConvertor.convert(csvRecord);
-			dctmTypesCache.put(csvRecord.get("r_object_type"), attributesDefinition);
+		final DctmDocument document = new DctmDocument();
+		document.setFindCriteria(csvRecord.get("$DUPLICATE_SEARCH_CRITERIA"));
+		String type = csvRecord.get("r_object_type");
+		if (type == null) {
+			type = "dm_document";
 		}
-
+		if (dctmTypesCache.get(type) == null) {
+			Map<String, RepositoryMetadata> attributesDefinition = dctmRepositoryMetadataConvertor.convert(csvRecord);
+			dctmTypesCache.put(type, attributesDefinition);
+		}
+		
+		document.setType(type);
 		for (Entry<String, String> cell : csvRecord.entrySet()) {
-			RepositoryEntityAttribute attributeValue = new RepositoryEntityAttribute();
-			RepositoryMetadata attributeDefinition = dctmTypesCache.get(csvRecord.get("r_object_type"))
+			RepositoryMetadata attributeDefinition = dctmTypesCache.get(type)
 					.get(cell.getKey());
+			if (attributeDefinition == null) {
+				continue;
+			}
+			RepositoryEntityAttribute attributeValue = new RepositoryEntityAttribute();
 			attributeValue.setMetadata(attributeDefinition);
 			try {
 				attributeValue.setValue(getCellValue(attributeDefinition, cell.getValue()));

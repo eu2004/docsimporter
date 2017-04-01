@@ -10,18 +10,18 @@ import ro.eu.documentimporter.inputprocessor.RepositoryDocumentConvertor;
 @Component
 public class DctmCSVInputParser extends CSVInputParser {
 	@Autowired
-	private DctmCSVRowParserCallback csvRowParserCallback;
+	private CSVRowParserCallback dctmCSVRowParserCallback;
 	@Autowired
-	private DctmRepositoryDocumentConvertor repositoryDocumentConvertor;
+	private RepositoryDocumentConvertor dctmRepositoryDocumentConvertor;
 
 	@Override
 	public CSVRowParserCallback getRowParserCallback() {
-		return csvRowParserCallback;
+		return dctmCSVRowParserCallback;
 	}
 
 	@Override
 	public RepositoryDocumentConvertor getRepositoryDocumentConvertor() {
-		return repositoryDocumentConvertor;
+		return dctmRepositoryDocumentConvertor;
 	}
 
 }
