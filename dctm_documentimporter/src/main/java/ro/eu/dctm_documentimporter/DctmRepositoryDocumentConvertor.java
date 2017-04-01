@@ -71,7 +71,7 @@ public class DctmRepositoryDocumentConvertor implements RepositoryDocumentConver
 
 	private String processedFindCriteria(RepositoryEntityAttribute attributeValue, String findCriteria) {
 		if (findCriteria.indexOf("$" + attributeValue.getMetadata().getName()) != -1) {
-			return findCriteria.replaceAll("\\\\$" + attributeValue.getMetadata().getName(), attributeValue.getValue().toString());
+			return findCriteria.replaceAll("\\$" + attributeValue.getMetadata().getName(), attributeValue.getValue().toString());
 		}
 		return "";
 	}

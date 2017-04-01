@@ -41,12 +41,14 @@ public abstract class RepositoryDocumentService {
 					return getRepositoryDocumentDAO().createDocument(document).getIdAttributeValue();
 				case UPDATE:
 					logger.debug(document + " already exists but update it");
+					document.setId(existingDocument.getIdAttributeValue());
 					return getRepositoryDocumentDAO().updateDocument(document).getIdAttributeValue();
 				case REPLACE:
 					logger.debug(document + " already exists but replace it");
 					return getRepositoryDocumentDAO().replaceDocument(document).getIdAttributeValue();
 				case VERSION:
 					logger.debug(document + " already exists but create a new version of it");
+					document.setId(existingDocument.getIdAttributeValue());
 					return getRepositoryDocumentDAO().createDocumentNewVersion(document).getIdAttributeValue();
 				default:
 					logger.debug(document + " was not created because already exists");
