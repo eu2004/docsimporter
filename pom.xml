@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>db</groupId>
-    <artifactId>xlsx-database-tool</artifactId>
+    <artifactId>docs-importer</artifactId>
     <packaging>pom</packaging>
-    <version>1.1</version>
-    <name>xlsx database tool</name>
+    <version>1.0</version>
+    <name>Generic documents importer</name>
 
 	<modules>
 		<module>alfresco_documentimporter</module>
