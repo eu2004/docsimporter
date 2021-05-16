@@ -19,6 +19,7 @@
 		<org.mockito.version>2.0.2-beta</org.mockito.version>
 		<org.aspectj.version>1.6.11</org.aspectj.version>
 		<commons-csv.version>1.4</commons-csv.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<dependencies>

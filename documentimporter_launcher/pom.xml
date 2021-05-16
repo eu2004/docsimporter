@@ -12,22 +12,12 @@
 
 	<properties>
 		<documentimporter.version>0.0.2</documentimporter.version>
-		<maven-compiler-plugin.version>2.3.1</maven-compiler-plugin.version>
+		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 		<java.version>1.8</java.version>
 		<dctm_documentimporter.version>0.0.1</dctm_documentimporter.version>
 		<dctm.version>7.1</dctm.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	<!-- 
-	<properties>
-		<documentimporter.version>0.0.2</documentimporter.version>
-		<maven-compiler-plugin.version>2.3.1</maven-compiler-plugin.version>
-		<java.version>1.8</java.version>
-		<dctm.version>7.1</dctm.version>
-		<spring.version>4.2.6.RELEASE</spring.version>
-		<junit.version>4.12</junit.version>
-		<commons-lang.version>2.4</commons-lang.version>
-	</properties>
- 	-->
 
 	<dependencies>
 		<dependency>
