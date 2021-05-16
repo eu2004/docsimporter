@@ -10,11 +10,11 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<junit.ver>4.11</junit.ver>
-		<spring.version>4.2.6.RELEASE</spring.version>
+		<junit.version>4.13.2</junit.version>
+		<spring.version>5.3.7</spring.version>
 		<org.slf4j.version>1.6.1</org.slf4j.version>
-		<apache.poi.version>3.14</apache.poi.version>
-		<maven-compiler-plugin.version>2.3.1</maven-compiler-plugin.version>
+		<apache.poi.version>5.0.0</apache.poi.version>
+		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 		<java.version>1.8</java.version>
 		<org.mockito.version>2.0.2-beta</org.mockito.version>
 		<org.aspectj.version>1.6.11</org.aspectj.version>
@@ -25,7 +25,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>${junit.ver}</version>
+			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
 
