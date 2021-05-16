@@ -4,7 +4,7 @@
                              http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>db</groupId>
+    <groupId>docimporter</groupId>
     <artifactId>docs-importer</artifactId>
     <packaging>pom</packaging>
     <version>1.0</version>
@@ -15,6 +15,6 @@
 		<module>dctm_documentimporter</module>
         <module>documentimporter</module>
         <module>documentimporter_launcher</module>
-	</modules>
+    </modules>
 
 </project>

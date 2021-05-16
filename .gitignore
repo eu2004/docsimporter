@@ -1,2 +1,4 @@
 /target/
 .idea
+third_party_lib
+*.iml
